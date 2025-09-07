@@ -53,4 +53,9 @@ public class HeapSortTest {
         HeapSort.heapsort(arr);
         assertArrayEquals(new int[]{-5, -1, 0, 3, 4}, arr);
     }
+
+    @Test
+    void testMainDoesNotThrow() {
+        Main.main(new String[]{});
+    }
 }
