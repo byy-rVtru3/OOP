@@ -25,7 +25,9 @@ public class Deck {
         for (int d = 0; d < numDecks; d++) {
             for (String suit : suits) {
                 for (int j = 0; j < ranks.length; j++) {
-                    cards.add(new Card(suit, ranks[j], values[j]));
+                    cards.add(
+                        new Card(suit, ranks[j], values[j])
+                    );
                 }
             }
         }
