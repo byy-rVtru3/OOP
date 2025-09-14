@@ -83,7 +83,8 @@ public class Blackjack {
 
         System.out.println("Дилер раздал карты");
         System.out.println("Ваши карты: " + player.getHand());
-        System.out.println("Карты дилера: [" + dealer.getHand().getCards().get(0) + ", <закрытая карта>]");
+        System.out.println("Карты дилера: [" + dealer.getHand().getCards().get(0)
+                + ", <закрытая карта>]");
 
         if (player.getHand().isBlackjack()) {
             System.out.println("У вас Блэкджек! Вы выиграли раунд!");
@@ -112,7 +113,8 @@ public class Blackjack {
         }
 
         System.out.println("Ход дилера");
-        System.out.println("Дилер открывает закрытую карту " + dealer.getHand().getCards().get(1));
+        System.out.println("Дилер открывает закрытую карту "
+                + dealer.getHand().getCards().get(1));
         System.out.println("Карты дилера: " + dealer.getHand());
 
         while (dealer.getHand().getScore() < 17) {
