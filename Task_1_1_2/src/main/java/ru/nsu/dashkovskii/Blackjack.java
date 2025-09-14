@@ -11,8 +11,10 @@ public class Blackjack {
     private int scoreDealer = 0;
 
     public Blackjack() {
-        System.out.print("Введите количество колод: ");
-        int numDecks = scanner.nextInt();
+        this(1);
+    }
+
+    public Blackjack(int numDecks) {
         deck = new Deck(numDecks);
     }
 
