@@ -3,7 +3,7 @@ package ru.nsu.dashkovskii;
 import java.util.*;
 
 public class Blackjack {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private Deck deck;
     private final Player player = new Player();
     private final Dealer dealer = new Dealer();
@@ -11,10 +11,18 @@ public class Blackjack {
     private int scoreDealer = 0;
 
     public Blackjack() {
-        this(1);
+        this(new Scanner(System.in));
+    }
+
+    public Blackjack(Scanner scanner) {
+        this.scanner = scanner;
+        System.out.print("Введите количество колод: ");
+        int numDecks = scanner.nextInt();
+        deck = new Deck(numDecks);
     }
 
     public Blackjack(int numDecks) {
+        this.scanner = new Scanner(System.in);
         deck = new Deck(numDecks);
     }
 
@@ -97,6 +105,13 @@ public class Blackjack {
             System.out.println("Ничья!");
         }
         printScore();
+    }
+    public void play(int rounds) {
+        System.out.println("Добро пожаловать в Блэкджек!");
+        for (int i = 1; i <= rounds; i++) {
+            System.out.println("\nРаунд " + i);
+            startRound();
+        }
     }
 
     private void printScore() {
