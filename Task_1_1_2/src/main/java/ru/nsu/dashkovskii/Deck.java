@@ -14,6 +14,7 @@ public class Deck {
 
     /**
      * Создает колоду из заданного количества колод.
+     *
      * @param numDecks количество колод
      */
     public Deck(int numDecks) {
@@ -40,6 +41,7 @@ public class Deck {
 
     /**
      * Раздает одну карту из колоды.
+     *
      * @return карта
      */
     public Card dealCard() {
@@ -48,6 +50,7 @@ public class Deck {
 
     /**
      * Возвращает количество оставшихся карт в колоде.
+     *
      * @return количество карт
      */
     public int size() {

@@ -16,6 +16,7 @@ public class Dealer {
 
     /**
      * Возвращает руку дилера.
+     *
      * @return рука дилера
      */
     public Hand getHand() {
@@ -24,6 +25,7 @@ public class Dealer {
 
     /**
      * Возвращает имя дилера.
+     *
      * @return имя дилера
      */
     public String getName() {

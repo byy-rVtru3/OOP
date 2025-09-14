@@ -16,6 +16,7 @@ public class Player {
 
     /**
      * Возвращает руку игрока.
+     *
      * @return рука игрока
      */
     public Hand getHand() {
@@ -24,6 +25,7 @@ public class Player {
 
     /**
      * Возвращает имя игрока.
+     *
      * @return имя игрока
      */
     public String getName() {

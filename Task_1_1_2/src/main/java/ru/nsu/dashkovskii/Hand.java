@@ -11,6 +11,7 @@ public class Hand {
 
     /**
      * Добавляет карту в руку.
+     *
      * @param card карта
      */
     public void addCard(Card card) {
@@ -19,6 +20,7 @@ public class Hand {
 
     /**
      * Возвращает сумму очков в руке.
+     *
      * @return сумма очков
      */
     public int getScore() {
@@ -42,6 +44,7 @@ public class Hand {
 
     /**
      * Проверяет, есть ли перебор (больше 21).
+     *
      * @return true, если перебор
      */
     public boolean isBust() {
@@ -50,6 +53,7 @@ public class Hand {
 
     /**
      * Проверяет, есть ли блэкджек (21 очко с двух карт).
+     *
      * @return true, если блэкджек
      */
     public boolean isBlackjack() {
@@ -58,6 +62,7 @@ public class Hand {
 
     /**
      * Возвращает список карт в руке.
+     *
      * @return список карт
      */
     public List<Card> getCards() {
@@ -66,6 +71,7 @@ public class Hand {
 
     /**
      * Возвращает строковое представление руки.
+     *
      * @return строка с картами и очками
      */
     @Override

@@ -10,6 +10,7 @@ public class Card {
 
     /**
      * Конструктор карты.
+     *
      * @param suit масть
      * @param rank достоинство
      * @param value значение карты
@@ -22,6 +23,7 @@ public class Card {
 
     /**
      * Возвращает значение карты.
+     *
      * @return значение
      */
     public int getValue() {
@@ -30,6 +32,7 @@ public class Card {
 
     /**
      * Возвращает достоинство карты.
+     *
      * @return достоинство
      */
     public String getRank() {
@@ -38,6 +41,7 @@ public class Card {
 
     /**
      * Возвращает масть карты.
+     *
      * @return масть
      */
     public String getSuit() {
@@ -46,6 +50,7 @@ public class Card {
 
     /**
      * Возвращает строковое представление карты.
+     *
      * @return строка с картой
      */
     @Override

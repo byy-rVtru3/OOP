@@ -1,6 +1,6 @@
 package ru.nsu.dashkovskii;
 
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * Класс, реализующий игру Блэкджек.
@@ -22,6 +22,7 @@ public class Blackjack {
 
     /**
      * Конструктор с передачей Scanner.
+     *
      * @param scanner источник ввода пользователя
      */
     public Blackjack(Scanner scanner) {
@@ -33,6 +34,7 @@ public class Blackjack {
 
     /**
      * Конструктор с указанием количества колод.
+     *
      * @param numDecks количество колод
      */
     public Blackjack(int numDecks) {
@@ -56,6 +58,7 @@ public class Blackjack {
 
     /**
      * Запускает игру на заданное количество раундов.
+     *
      * @param rounds количество раундов
      */
     public void play(int rounds) {
