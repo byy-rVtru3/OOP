@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class MainTest {
     @Test
     void testMainDoesNotThrow() {
-        // Ввод: 1 колода, действие игрока — остановиться (0)
         String input = "1\n0\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);

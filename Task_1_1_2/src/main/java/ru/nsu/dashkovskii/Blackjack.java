@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.*;
 
+/**
+ * Класс, реализующий игру Блэкджек.
+ */
 public class Blackjack {
     private final Scanner scanner;
     private Deck deck;
@@ -10,10 +13,17 @@ public class Blackjack {
     private int scorePlayer = 0;
     private int scoreDealer = 0;
 
+    /**
+     * Конструктор по умолчанию. Использует стандартный ввод.
+     */
     public Blackjack() {
         this(new Scanner(System.in));
     }
 
+    /**
+     * Конструктор с передачей Scanner.
+     * @param scanner источник ввода пользователя
+     */
     public Blackjack(Scanner scanner) {
         this.scanner = scanner;
         System.out.print("Введите количество колод: ");
@@ -21,11 +31,18 @@ public class Blackjack {
         deck = new Deck(numDecks);
     }
 
+    /**
+     * Конструктор с указанием количества колод.
+     * @param numDecks количество колод
+     */
     public Blackjack(int numDecks) {
         this.scanner = new Scanner(System.in);
         deck = new Deck(numDecks);
     }
 
+    /**
+     * Запускает игру в бесконечном цикле.
+     */
     public void play() {
         System.out.println("Добро пожаловать в Блэкджек!");
         int round = 1;
@@ -37,6 +54,21 @@ public class Blackjack {
         }
     }
 
+    /**
+     * Запускает игру на заданное количество раундов.
+     * @param rounds количество раундов
+     */
+    public void play(int rounds) {
+        System.out.println("Добро пожаловать в Блэкджек!");
+        for (int i = 1; i <= rounds; i++) {
+            System.out.println("\nРаунд " + i);
+            startRound();
+        }
+    }
+
+    /**
+     * Запускает один раунд игры.
+     */
     private void startRound() {
         player.getHand().getCards().clear();
         dealer.getHand().getCards().clear();
@@ -106,14 +138,10 @@ public class Blackjack {
         }
         printScore();
     }
-    public void play(int rounds) {
-        System.out.println("Добро пожаловать в Блэкджек!");
-        for (int i = 1; i <= rounds; i++) {
-            System.out.println("\nРаунд " + i);
-            startRound();
-        }
-    }
 
+    /**
+     * Выводит текущий счет.
+     */
     private void printScore() {
         System.out.println("Счет " + scorePlayer + ":" + scoreDealer);
     }
