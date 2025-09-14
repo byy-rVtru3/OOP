@@ -1,10 +1,14 @@
 package ru.nsu.dashkovskii;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
+import org.junit.jupiter.api.Test;
 
+/**
+ * Тесты для класса Main.
+ */
 public class MainTest {
     @Test
     void testMainDoesNotThrow() {
