@@ -3,11 +3,8 @@ package ru.nsu.dashkovskii;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Scanner;
-
 import java.util.LinkedList;
-
 import java.util.Queue;
-
 import org.junit.jupiter.api.Test;
 
 /**

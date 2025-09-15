@@ -1,13 +1,10 @@
 package ru.nsu.dashkovskii;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.ByteArrayInputStream;
-
 import java.util.Scanner;
-
 import org.junit.jupiter.api.Test;
 
 /**
