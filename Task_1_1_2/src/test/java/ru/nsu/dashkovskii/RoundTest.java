@@ -1,10 +1,10 @@
 package ru.nsu.dashkovskii;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,7 +21,9 @@ public class RoundTest {
         public TestDeck(Card... cards) {
             super(1);
             queue = new LinkedList<>();
-            for (Card c : cards) queue.add(c);
+            for (Card c : cards) {
+                queue.add(c);
+            }
         }
 
         @Override
@@ -31,7 +33,7 @@ public class RoundTest {
     }
 
     /**
-     * Проверяет, что раунд ��авершается корректно при блэкджеке у игрока.
+     * Проверяет, что раунд завершается корректно при блэкджеке у игрока.
      */
     @Test
     void testPlayerBlackjack() {
@@ -46,7 +48,9 @@ public class RoundTest {
         Player.Dealer dealer = new Player.Dealer();
         View view = new View(new Scanner(System.in)) {
             @Override
-            public int getPlayerChoice() { return 0; }
+            public int getPlayerChoice() {
+                return 0;
+            }
         };
 
         Round.Result result = Round.playRound(player, dealer, deck, view);
@@ -69,7 +73,9 @@ public class RoundTest {
         Player.Dealer dealer = new Player.Dealer();
         View view = new View(new Scanner(System.in)) {
             @Override
-            public int getPlayerChoice() { return 0; }
+            public int getPlayerChoice() {
+                return 0;
+            }
         };
 
         Round.Result result = Round.playRound(player, dealer, deck, view);

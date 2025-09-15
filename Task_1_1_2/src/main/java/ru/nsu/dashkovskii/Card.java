@@ -4,6 +4,9 @@ package ru.nsu.dashkovskii;
  * Класс, представляющий одну карту.
  */
 public class Card {
+    /**
+     * Перечисление мастей карты.
+     */
     public enum Suit {
         HEARTS("Черви"),
         DIAMONDS("Бубны"),
@@ -22,6 +25,9 @@ public class Card {
         }
     }
 
+    /**
+     * Перечисление достоинств карты.
+     */
     public enum Rank {
         TWO("2"),
         THREE("3"),
