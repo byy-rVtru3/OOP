@@ -16,7 +16,7 @@ public class Round {
      *
      * @param player игрок
      * @param dealer дилер
-     * @param deck   колода ка��т
+     * @param deck   колода карт
      * @param view   объект для взаимодейств��я с пользователем
      * @return результат раунда
      */
