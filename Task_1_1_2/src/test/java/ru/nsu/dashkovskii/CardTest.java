@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 class CardTest {
     @Test
     void testCardFields() {
-        Card card = new Card("Пики", "Туз", 11);
-        assertEquals("Пики", card.getSuit());
-        assertEquals("Туз", card.getRank());
+        Card card = new Card(Card.Suit.SPADES, Card.Rank.ACE, 11);
+        assertEquals(Card.Suit.SPADES, card.getSuit());
+        assertEquals(Card.Rank.ACE, card.getRank());
         assertEquals(11, card.getValue());
         assertTrue(card.toString().contains("Туз"));
     }

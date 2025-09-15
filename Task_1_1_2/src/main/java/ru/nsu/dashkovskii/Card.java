@@ -4,8 +4,53 @@ package ru.nsu.dashkovskii;
  * Класс, представляющий одну карту.
  */
 public class Card {
-    private final String suit;
-    private final String rank;
+    public enum Suit {
+        HEARTS("Черви"),
+        DIAMONDS("Бубны"),
+        CLUBS("Трефы"),
+        SPADES("Пики");
+
+        private final String displayName;
+
+        Suit(String displayName) {
+            this.displayName = displayName;
+        }
+
+        @Override
+        public String toString() {
+            return displayName;
+        }
+    }
+
+    public enum Rank {
+        TWO("2"),
+        THREE("3"),
+        FOUR("4"),
+        FIVE("5"),
+        SIX("6"),
+        SEVEN("7"),
+        EIGHT("8"),
+        NINE("9"),
+        TEN("10"),
+        JACK("Валет"),
+        QUEEN("Дама"),
+        KING("Король"),
+        ACE("Туз");
+
+        private final String displayName;
+
+        Rank(String displayName) {
+            this.displayName = displayName;
+        }
+
+        @Override
+        public String toString() {
+            return displayName;
+        }
+    }
+
+    private final Suit suit;
+    private final Rank rank;
     private final int value;
 
     /**
@@ -15,7 +60,7 @@ public class Card {
      * @param rank достоинство
      * @param value значение карты
      */
-    public Card(String suit, String rank, int value) {
+    public Card(Suit suit, Rank rank, int value) {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
@@ -35,7 +80,7 @@ public class Card {
      *
      * @return достоинство
      */
-    public String getRank() {
+    public Rank getRank() {
         return rank;
     }
 
@@ -44,7 +89,7 @@ public class Card {
      *
      * @return масть
      */
-    public String getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 

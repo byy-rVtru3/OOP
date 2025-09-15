@@ -14,9 +14,8 @@ class PlayerDealerTest {
 
     @Test
     void testDealerNameAndHand() {
-        Dealer dealer = new Dealer();
+        Player.Dealer dealer = new Player.Dealer();
         assertEquals("Дилер", dealer.getName());
         assertNotNull(dealer.getHand());
     }
 }
-
