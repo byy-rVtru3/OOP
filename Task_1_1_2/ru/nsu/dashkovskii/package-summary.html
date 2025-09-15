@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="package-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -62,7 +66,8 @@ loadScripts(document, 'script');</script>
 <ul class="summary-list">
 <li>
 <div id="class-summary">
-<div class="caption"><span>Classes</span></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
@@ -74,25 +79,42 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Класс, представляющий одну карту.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Dealer.html" title="class in ru.nsu.dashkovskii">Dealer</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="Card.Rank.html" title="enum class in ru.nsu.dashkovskii">Card.Rank</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">&nbsp;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="Card.Suit.html" title="enum class in ru.nsu.dashkovskii">Card.Suit</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab3">&nbsp;</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Deck.html" title="class in ru.nsu.dashkovskii">Deck</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Класс, представляющий дилера.</div>
-</div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Deck.html" title="class in ru.nsu.dashkovskii">Deck</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Класс, представляющий колоду карт.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Hand.html" title="class in ru.nsu.dashkovskii">Hand</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Hand.html" title="class in ru.nsu.dashkovskii">Hand</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Класс, представляющий руку игрока или дилера.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.dashkovskii">Main</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.dashkovskii">Main</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Точка входа в приложение.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Player.html" title="class in ru.nsu.dashkovskii">Player</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Player.html" title="class in ru.nsu.dashkovskii">Player</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Класс, представляющий игрока.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Player.Dealer.html" title="class in ru.nsu.dashkovskii">Player.Dealer</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Класс дилера как наследник игрока.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Round.html" title="class in ru.nsu.dashkovskii">Round</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Класс, реализующий один раунд игры Блэкджек.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="Round.Result.html" title="enum class in ru.nsu.dashkovskii">Round.Result</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">Возможные результаты раунда.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="View.html" title="class in ru.nsu.dashkovskii">View</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Класс для взаимодействия с пользователем (вывод сообщений и получение ввода).</div>
+</div>
 </div>
 </div>
 </div>
