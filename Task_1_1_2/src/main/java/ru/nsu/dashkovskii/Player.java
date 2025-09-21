@@ -39,12 +39,5 @@ public class Player {
         return name;
     }
 
-    /**
-     * Класс дилера как наследник игрока.
-     */
-    public static class Dealer extends Player {
-        public Dealer() {
-            super("Дилер");
-        }
-    }
+
 }

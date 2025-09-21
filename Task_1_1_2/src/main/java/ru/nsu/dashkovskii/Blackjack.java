@@ -9,7 +9,7 @@ public class Blackjack {
     private final Scanner scanner;
     private Deck deck;
     private final Player player = new Player();
-    private final Player.Dealer dealer = new Player.Dealer();
+    private final Dealer dealer = new Dealer();
     private int scorePlayer = 0;
     private int scoreDealer = 0;
     private final View view;

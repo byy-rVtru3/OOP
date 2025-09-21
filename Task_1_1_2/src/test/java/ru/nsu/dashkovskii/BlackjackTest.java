@@ -26,7 +26,6 @@ class BlackjackTest {
      */
     @Test
     void testBlackjackPlayDoesNotThrow() {
-        // Сначала ввод количества колод, затем выбор игрока
         String input = "1\n0\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);

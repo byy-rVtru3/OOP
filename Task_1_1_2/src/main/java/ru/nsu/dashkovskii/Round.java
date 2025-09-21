@@ -20,7 +20,7 @@ public class Round {
      * @param view   объект для взаимодейств��я с пользователем
      * @return результат раунда
      */
-    public static Result playRound(Player player, Player.Dealer dealer, Deck deck, View view) {
+    public static Result playRound(Player player, Dealer dealer, Deck deck, View view) {
         player.getHand().getCards().clear();
         dealer.getHand().getCards().clear();
 

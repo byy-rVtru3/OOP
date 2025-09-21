@@ -18,12 +18,12 @@ public class Deck {
      * @param numDecks количество колод
      */
     public Deck(int numDecks) {
-        Card.Suit[] suits = Card.Suit.values();
-        Card.Rank[] ranks = Card.Rank.values();
+        Suit[] suits = Suit.values();
+        Rank[] ranks = Rank.values();
         int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
 
         for (int d = 0; d < numDecks; d++) {
-            for (Card.Suit suit : suits) {
+            for (Suit suit : suits) {
                 for (int j = 0; j < ranks.length; j++) {
                     cards.add(
                         new Card(suit, ranks[j], values[j])

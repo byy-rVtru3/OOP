@@ -37,15 +37,14 @@ public class RoundTest {
      */
     @Test
     void testPlayerBlackjack() {
-        // Порядок: игрок1, игрок2, дилер1, дилер2
-        Card player1 = new Card(Card.Suit.SPADES, Card.Rank.ACE, 11);
-        Card player2 = new Card(Card.Suit.HEARTS, Card.Rank.KING, 10);
-        Card dealer1 = new Card(Card.Suit.CLUBS, Card.Rank.FIVE, 5);
-        Card dealer2 = new Card(Card.Suit.DIAMONDS, Card.Rank.SIX, 6);
+        Card player1 = new Card(Suit.SPADES, Rank.ACE, 11);
+        Card player2 = new Card(Suit.HEARTS, Rank.KING, 10);
+        Card dealer1 = new Card(Suit.CLUBS, Rank.FIVE, 5);
+        Card dealer2 = new Card(Suit.DIAMONDS, Rank.SIX, 6);
 
         Deck deck = new TestDeck(player1, player2, dealer1, dealer2);
         Player player = new Player();
-        Player.Dealer dealer = new Player.Dealer();
+        Dealer dealer = new Dealer();
         View view = new View(new Scanner(System.in)) {
             @Override
             public int getPlayerChoice() {
@@ -62,15 +61,14 @@ public class RoundTest {
      */
     @Test
     void testDraw() {
-        // Порядок: игрок1, игрок2, дилер1, дилер2
-        Card player1 = new Card(Card.Suit.SPADES, Card.Rank.TEN, 10);
-        Card player2 = new Card(Card.Suit.HEARTS, Card.Rank.NINE, 9);
-        Card dealer1 = new Card(Card.Suit.CLUBS, Card.Rank.TEN, 10);
-        Card dealer2 = new Card(Card.Suit.DIAMONDS, Card.Rank.NINE, 9);
+        Card player1 = new Card(Suit.SPADES, Rank.TEN, 10);
+        Card player2 = new Card(Suit.HEARTS, Rank.NINE, 9);
+        Card dealer1 = new Card(Suit.CLUBS, Rank.TEN, 10);
+        Card dealer2 = new Card(Suit.DIAMONDS, Rank.NINE, 9);
 
         Deck deck = new TestDeck(player1, player2, dealer1, dealer2);
         Player player = new Player();
-        Player.Dealer dealer = new Player.Dealer();
+        Dealer dealer = new Dealer();
         View view = new View(new Scanner(System.in)) {
             @Override
             public int getPlayerChoice() {
