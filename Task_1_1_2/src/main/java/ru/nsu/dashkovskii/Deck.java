@@ -11,7 +11,6 @@ import java.util.Random;
 public class Deck {
     private final List<Card> cards = new ArrayList<>();
     private final Random random = new Random();
-
     /**
      * Создает колоду из заданного количества колод.
      *

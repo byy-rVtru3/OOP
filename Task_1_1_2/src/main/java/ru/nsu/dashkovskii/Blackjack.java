@@ -30,7 +30,17 @@ public class Blackjack {
         this.scanner = scanner;
         this.view = new View(scanner);
         view.print("Введите количество колод: ");
-        int numDecks = scanner.nextInt();
+        int numDecks = 0;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                numDecks = scanner.nextInt();
+                break;
+            } else {
+                view.print("Ошибка: введите целое число!\n");
+                scanner.next();
+                view.print("Введите количество колод: ");
+            }
+        }
         deck = new Deck(numDecks);
     }
 
