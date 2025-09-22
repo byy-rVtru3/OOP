@@ -96,7 +96,20 @@ public class View {
      * @return выбор игрока (1 — взять карту, 0 — остановиться)
      */
     public int getPlayerChoice() {
-        return scanner.nextInt();
+        while (true) {
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                if (choice == 1 || choice == 0) {
+                    return choice;
+                } else {
+                    println("Ошибка: введите только 1 (взять карту) или 0 (остановиться).");
+                }
+            } else {
+                println("Ошибка: введите только 1 (взять карту) или 0 (остановиться).");
+                scanner.next();
+            }
+            print("Введите '1', чтобы взять карту, и '0', чтобы остановиться: ");
+        }
     }
 
     /**
