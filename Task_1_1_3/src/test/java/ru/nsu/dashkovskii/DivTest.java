@@ -117,4 +117,66 @@ public class DivTest {
         Div div = new Div(new Variable("x"), new Number(2));
         assertEquals("(x/2)", div.toString());
     }
+
+    /**
+     * Тестирует деление отрицательных чисел.
+     */
+    @Test
+    public void testEvaluateNegativeNumbers() {
+        Div div1 = new Div(new Number(-10), new Number(2));
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(-5, div1.evaluate(vars));
+
+        Div div2 = new Div(new Number(10), new Number(-2));
+        assertEquals(-5, div2.evaluate(vars));
+
+        Div div3 = new Div(new Number(-10), new Number(-2));
+        assertEquals(5, div3.evaluate(vars));
+    }
+
+    /**
+     * Тестирует деление с остатком (целочисленное деление).
+     */
+    @Test
+    public void testEvaluateWithRemainder() {
+        Div div = new Div(new Number(7), new Number(3));
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(2, div.evaluate(vars)); // 7/3 = 2 (целочисленное деление)
+    }
+
+    /**
+     * Тестирует упрощение деления констант.
+     */
+    @Test
+    public void testSimplificationConstants() {
+        Div div = new Div(new Number(12), new Number(3));
+        Expression simplified = div.simplify();
+        assertEquals("4", simplified.toString());
+    }
+
+    /**
+     * Тестирует производную константы, деленной на переменную.
+     */
+    @Test
+    public void testDerivativeConstantDividedByVariable() {
+        // d/dx(5/x) = (0*x - 5*1)/(x*x) = -5/(x*x)
+        Div div = new Div(new Number(5), new Variable("x"));
+        Expression derivative = div.derivative("x");
+
+        Map<String, Integer> vars = new HashMap<>();
+        vars.put("x", 2);
+        // Результат: -5/(2*2) = -5/4 = -1 (в целочисленной арифметике)
+        assertEquals(-1, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует деление на переменную со значением ноль.
+     */
+    @Test
+    public void testDivisionByVariableZero() {
+        Div div = new Div(new Number(5), new Variable("x"));
+        Map<String, Integer> vars = new HashMap<>();
+        vars.put("x", 0);
+        assertThrows(ArithmeticException.class, () -> div.evaluate(vars));
+    }
 }
