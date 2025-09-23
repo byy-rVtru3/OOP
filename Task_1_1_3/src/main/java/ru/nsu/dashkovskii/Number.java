@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Класс, представляющий числовую константу в выражении.
+ */
 public class Number extends Expression {
     private final int value;
 

@@ -1,5 +1,9 @@
 package ru.nsu.dashkovskii;
 
+/**
+ * Абстрактный класс для бинарных операций над выражениями.
+ * Содержит левый и правый операнды.
+ */
 public abstract class BinaryOperations extends Expression {
     protected final Expression left;
     protected final Expression right;

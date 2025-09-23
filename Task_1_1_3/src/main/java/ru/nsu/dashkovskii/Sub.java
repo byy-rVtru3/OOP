@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Класс, представляющий операцию вычитания между двумя выражениями.
+ */
 public class Sub extends BinaryOperations {
     public Sub(Expression left, Expression right) {
         super(left, right);

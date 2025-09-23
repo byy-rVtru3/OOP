@@ -2,12 +2,16 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Класс, представляющий переменную в математическом выражении.
+ */
 public class Variable extends Expression {
     private final String name;
 
     public Variable(String name) {
         this.name = name;
     }
+
     @Override
     public int evaluate(Map<String, Integer> variables) {
         if (!variables.containsKey(name)) {

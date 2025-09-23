@@ -1,10 +1,18 @@
 package ru.nsu.dashkovskii;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Тестовый класс для проверки функциональности абстрактного класса Expression.
+ */
 public class ExpressionTest {
 
+    /**
+     * Тестирует метод eval с одной переменной.
+     */
     @Test
     public void testEval() {
         Expression expr = new Add(new Variable("x"), new Number(5));
@@ -12,6 +20,9 @@ public class ExpressionTest {
         assertEquals(7, expr.eval("x = 2"));
     }
 
+    /**
+     * Тестирует метод eval с несколькими переменными.
+     */
     @Test
     public void testEvalMultipleVariables() {
         Expression expr = new Add(new Variable("x"), new Variable("y"));
@@ -19,6 +30,9 @@ public class ExpressionTest {
         assertEquals(7, expr.eval("x = 3; y = 4"));
     }
 
+    /**
+     * Тестирует метод eval с пустыми присваиваниями.
+     */
     @Test
     public void testEvalEmptyAssignments() {
         Expression expr = new Number(42);
@@ -26,6 +40,9 @@ public class ExpressionTest {
         assertEquals(42, expr.eval(null));
     }
 
+    /**
+     * Тестирует метод print, проверяет отсутствие исключений.
+     */
     @Test
     public void testPrint() {
         Expression expr = new Add(new Number(3), new Variable("x"));

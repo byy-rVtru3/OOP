@@ -1,12 +1,19 @@
 package ru.nsu.dashkovskii;
 
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Тестовый класс для проверки функциональности класса Number.
+ */
 public class NumberTest {
 
+    /**
+     * Тестирует вычисление значения положительного числа.
+     */
     @Test
     public void testEvaluate() {
         Number num = new Number(42);
@@ -14,6 +21,9 @@ public class NumberTest {
         assertEquals(42, num.evaluate(vars));
     }
 
+    /**
+     * Тестирует вычисление значения нуля.
+     */
     @Test
     public void testEvaluateZero() {
         Number num = new Number(0);
@@ -21,6 +31,9 @@ public class NumberTest {
         assertEquals(0, num.evaluate(vars));
     }
 
+    /**
+     * Тестирует вычисление значения отрицательного числа.
+     */
     @Test
     public void testEvaluateNegative() {
         Number num = new Number(-15);
@@ -28,6 +41,9 @@ public class NumberTest {
         assertEquals(-15, num.evaluate(vars));
     }
 
+    /**
+     * Тестирует взятие производной от константы (должна быть равна нулю).
+     */
     @Test
     public void testDerivative() {
         Number num = new Number(42);
@@ -38,6 +54,9 @@ public class NumberTest {
         assertEquals(0, derivative.evaluate(vars));
     }
 
+    /**
+     * Тестирует строковое представление числа.
+     */
     @Test
     public void testToString() {
         Number num = new Number(42);
@@ -47,4 +66,3 @@ public class NumberTest {
         assertEquals("-15", negNum.toString());
     }
 }
-

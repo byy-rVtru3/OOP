@@ -1,12 +1,20 @@
 package ru.nsu.dashkovskii;
 
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+/**
+ * Тестовый класс для проверки функциональности класса Variable.
+ */
 public class VariableTest {
 
+    /**
+     * Тестирует вычисление значения переменной с одним символом.
+     */
     @Test
     public void testEvaluate() {
         Variable var = new Variable("x");
@@ -15,6 +23,9 @@ public class VariableTest {
         assertEquals(42, var.evaluate(vars));
     }
 
+    /**
+     * Тестирует вычисление значения переменной с несколькими символами.
+     */
     @Test
     public void testEvaluateMultiCharName() {
         Variable var = new Variable("foo");
@@ -23,6 +34,9 @@ public class VariableTest {
         assertEquals(123, var.evaluate(vars));
     }
 
+    /**
+     * Тестирует исключение при отсутствии значения переменной в контексте.
+     */
     @Test
     public void testEvaluateMissingVariable() {
         Variable var = new Variable("x");
@@ -30,6 +44,9 @@ public class VariableTest {
         assertThrows(RuntimeException.class, () -> var.evaluate(vars));
     }
 
+    /**
+     * Тестирует взятие производной по той же переменной (должна быть равна 1).
+     */
     @Test
     public void testDerivativeSameVariable() {
         Variable var = new Variable("x");
@@ -40,6 +57,9 @@ public class VariableTest {
         assertEquals(1, derivative.evaluate(vars));
     }
 
+    /**
+     * Тестирует взятие производной по другой переменной (должна быть равна 0).
+     */
     @Test
     public void testDerivativeDifferentVariable() {
         Variable var = new Variable("x");
@@ -51,6 +71,9 @@ public class VariableTest {
         assertEquals(0, derivative.evaluate(vars));
     }
 
+    /**
+     * Тестирует строковое представление переменной.
+     */
     @Test
     public void testToString() {
         Variable var = new Variable("x");
@@ -60,4 +83,3 @@ public class VariableTest {
         assertEquals("foo", multiChar.toString());
     }
 }
-

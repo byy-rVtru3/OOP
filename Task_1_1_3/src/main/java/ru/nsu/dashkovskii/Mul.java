@@ -2,7 +2,11 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
-public class Mul extends BinaryOperations{
+/**
+ * Класс, представляющий операцию умножения между двумя выражениями.
+ */
+public class Mul extends BinaryOperations {
+
     public Mul(Expression left, Expression right) {
         super(left, right);
     }

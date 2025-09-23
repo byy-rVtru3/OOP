@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Класс, представляющий операцию деления между двумя выражениями.
+ */
 public class Div extends BinaryOperations {
     public Div(Expression left, Expression right) {
         super(left, right);
@@ -15,7 +18,7 @@ public class Div extends BinaryOperations {
     @Override
     public Expression derivative(String var) {
         return new Div(
-                new Sub (
+                new Sub(
                         new Mul(left, right.derivative(var)),
                         new Mul(left.derivative(var), right)
                 ),

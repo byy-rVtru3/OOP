@@ -1,9 +1,14 @@
 package ru.nsu.dashkovskii;
 
-import org.junit.jupiter.api.Test;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+/**
+ * Тестовый класс для проверки функциональности абстрактного класса BinaryOperations.
+ */
 public class BinaryOperationsTest {
 
     // Тестовая реализация BinaryOperations для проверки базового функционала
@@ -28,12 +33,18 @@ public class BinaryOperationsTest {
         }
     }
 
+    /**
+     * Тестирует строковое представление бинарной операции.
+     */
     @Test
     public void testToString() {
         BinaryOperations op = new TestBinaryOperation(new Number(3), new Variable("x"));
         assertEquals("(3*x)", op.toString());
     }
 
+    /**
+     * Тестирует строковое представление вложенных бинарных операций.
+     */
     @Test
     public void testToStringNested() {
         BinaryOperations inner = new TestBinaryOperation(new Number(2), new Variable("y"));
@@ -41,6 +52,9 @@ public class BinaryOperationsTest {
         assertEquals("(3*(2*y))", outer.toString());
     }
 
+    /**
+     * Тестирует конструктор бинарной операции.
+     */
     @Test
     public void testConstructor() {
         Expression left = new Number(5);

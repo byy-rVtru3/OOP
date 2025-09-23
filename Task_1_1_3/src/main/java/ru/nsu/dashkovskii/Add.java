@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Класс, представляющий операцию сложения между двумя выражениями.
+ */
 public class Add extends BinaryOperations {
     public Add(Expression left, Expression right) {
         super(left, right);

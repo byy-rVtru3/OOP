@@ -1,6 +1,14 @@
 package ru.nsu.dashkovskii;
 
+/**
+ * Главный класс приложения для работы с математическими выражениями.
+ */
 public class Main {
+    /**
+     * Главный метод приложения.
+     *
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner();
 

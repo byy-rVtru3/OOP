@@ -2,6 +2,10 @@ package ru.nsu.dashkovskii;
 
 import java.util.Map;
 
+/**
+ * Абстрактный класс для математических выражений.
+ * Поддерживает вычисление значения и дифференцирование.
+ */
 public abstract class Expression {
 
     public abstract int evaluate(Map<String, Integer> variables);

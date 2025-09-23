@@ -1,12 +1,19 @@
 package ru.nsu.dashkovskii;
 
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Тестовый класс для проверки функциональности класса Add.
+ */
 public class AddTest {
 
+    /**
+     * Тестирует сложение двух числовых констант.
+     */
     @Test
     public void testEvaluateNumbers() {
         Add add = new Add(new Number(3), new Number(5));
@@ -14,6 +21,9 @@ public class AddTest {
         assertEquals(8, add.evaluate(vars));
     }
 
+    /**
+     * Тестирует сложение переменной и числовой константы.
+     */
     @Test
     public void testEvaluateWithVariables() {
         Add add = new Add(new Variable("x"), new Number(10));
@@ -22,6 +32,9 @@ public class AddTest {
         assertEquals(15, add.evaluate(vars));
     }
 
+    /**
+     * Тестирует сложение двух переменных.
+     */
     @Test
     public void testEvaluateTwoVariables() {
         Add add = new Add(new Variable("x"), new Variable("y"));
@@ -31,6 +44,9 @@ public class AddTest {
         assertEquals(10, add.evaluate(vars));
     }
 
+    /**
+     * Тестирует взятие производной от суммы.
+     */
     @Test
     public void testDerivative() {
         // (x + 5)' = 1 + 0
@@ -42,6 +58,9 @@ public class AddTest {
         assertEquals(1, derivative.evaluate(vars));
     }
 
+    /**
+     * Тестирует взятие производной от суммы двух переменных.
+     */
     @Test
     public void testDerivativeTwoVariables() {
         // (x + y)' по x = 1 + 0
@@ -54,6 +73,9 @@ public class AddTest {
         assertEquals(1, derivative.evaluate(vars));
     }
 
+    /**
+     * Тестирует строковое представление операции сложения.
+     */
     @Test
     public void testToString() {
         Add add = new Add(new Number(3), new Variable("x"));

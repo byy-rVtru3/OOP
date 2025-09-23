@@ -1,8 +1,16 @@
 package ru.nsu.dashkovskii;
 
+/**
+ * Класс для чтения пользовательского ввода с консоли.
+ */
 public class Scanner {
     private final java.util.Scanner scanner = new java.util.Scanner(System.in);
 
+    /**
+     * Читает математическое выражение с консоли с валидацией.
+     *
+     * @return корректное математическое выражение
+     */
     public String readExpression() {
         while (true) {
             System.out.println("Введите выражение (например, (3+(2*x))):");
@@ -18,13 +26,19 @@ public class Scanner {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка парсинга: " + e.getMessage());
-                System.out.println("Примеры корректных выражений: (3+x), (x*2), ((x+1)*(y-2))");
+                System.out.println(
+                        "Примеры корректных выражений: (3+x), (x*2), ((x+1)*(y-2))");
             } catch (Exception e) {
                 System.out.println("Неожиданная ошибка: " + e.getMessage());
             }
         }
     }
 
+    /**
+     * Читает строку с присваиваниями переменных с консоли с валидацией.
+     *
+     * @return корректная строка присваиваний
+     */
     public String readAssignments() {
         while (true) {
             System.out.print("Введите подстановки (например, x = 10; y = 13): ");
@@ -42,6 +56,11 @@ public class Scanner {
         }
     }
 
+    /**
+     * Читает имя переменной для дифференцирования с консоли с валидацией.
+     *
+     * @return корректное имя переменной
+     */
     public String readDiffVariable() {
         while (true) {
             System.out.print("Введите переменную для дифференцирования: ");
@@ -53,7 +72,9 @@ public class Scanner {
             }
 
             if (!isValidVariable(input)) {
-                System.out.println("Ошибка: Некорректное имя переменной. Переменная должна начинаться с буквы и содержать только буквы и цифры.");
+                System.out.println(
+                        "Ошибка: Некорректное имя переменной. Переменная должна "
+                        + "начинаться с буквы и содержать только буквы и цифры.");
                 continue;
             }
 
@@ -62,10 +83,16 @@ public class Scanner {
     }
 
     private boolean isValidVariable(String s) {
-        if (s.isEmpty()) return false;
-        if (!Character.isLetter(s.charAt(0))) return false;
+        if (s.isEmpty()) {
+            return false;
+        }
+        if (!Character.isLetter(s.charAt(0))) {
+            return false;
+        }
         for (char c : s.toCharArray()) {
-            if (!Character.isLetterOrDigit(c)) return false;
+            if (!Character.isLetterOrDigit(c)) {
+                return false;
+            }
         }
         return true;
     }

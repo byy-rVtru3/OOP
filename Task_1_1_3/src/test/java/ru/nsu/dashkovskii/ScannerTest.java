@@ -1,17 +1,28 @@
 package ru.nsu.dashkovskii;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+/**
+ * Тестовый класс для проверки функциональности класса Scanner.
+ */
 public class ScannerTest {
 
+    /**
+     * Тестирует приватный метод isValidVariable с помощью рефлексии.
+     */
     @Test
     public void testIsValidVariableName() {
         Scanner scanner = new Scanner();
 
         // Используем рефлексию для тестирования приватного метода
         try {
-            java.lang.reflect.Method method = Scanner.class.getDeclaredMethod("isValidVariable", String.class);
+            java.lang.reflect.Method method = Scanner.class
+                    .getDeclaredMethod("isValidVariable", String.class);
             method.setAccessible(true);
 
             assertTrue((Boolean) method.invoke(scanner, "x"));
@@ -31,6 +42,9 @@ public class ScannerTest {
         }
     }
 
+    /**
+     * Тестирует создание экземпляра Scanner.
+     */
     @Test
     public void testScannerCreation() {
         Scanner scanner = new Scanner();
