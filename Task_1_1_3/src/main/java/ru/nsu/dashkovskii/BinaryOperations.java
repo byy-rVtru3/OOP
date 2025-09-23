@@ -1,7 +1,7 @@
 package ru.nsu.dashkovskii;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Абстрактный класс для бинарных операций над выражениями.

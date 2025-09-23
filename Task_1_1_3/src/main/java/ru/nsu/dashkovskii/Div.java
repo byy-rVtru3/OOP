@@ -1,7 +1,7 @@
 package ru.nsu.dashkovskii;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс, представляющий операцию деления между двумя выражениями.

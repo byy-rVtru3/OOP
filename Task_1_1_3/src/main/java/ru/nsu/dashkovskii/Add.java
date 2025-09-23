@@ -1,7 +1,7 @@
 package ru.nsu.dashkovskii;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс, представляющий операцию сложения между двумя выражениями.
@@ -28,17 +28,20 @@ public class Add extends BinaryOperations {
 
         if (leftSimplified.isConstant() && rightSimplified.isConstant()) {
             try {
-                int result = leftSimplified.evaluate(new HashMap<>()) + rightSimplified.evaluate(new HashMap<>());
+                int result = leftSimplified.evaluate(new HashMap<>())
+                        + rightSimplified.evaluate(new HashMap<>());
                 return new Number(result);
             } catch (Exception e) {
                 // Если не удалось вычислить, возвращаем упрощенное выражение
             }
         }
 
-        if (leftSimplified instanceof Number && ((Number) leftSimplified).getValue() == 0) {
+        if (leftSimplified instanceof Number
+                && ((Number) leftSimplified).getValue() == 0) {
             return rightSimplified;
         }
-        if (rightSimplified instanceof Number && ((Number) rightSimplified).getValue() == 0) {
+        if (rightSimplified instanceof Number
+                && ((Number) rightSimplified).getValue() == 0) {
             return leftSimplified;
         }
 

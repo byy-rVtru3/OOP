@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Класс для парсинга математических выражений из строки.
+ * Класс для пар��инга математических выражений из строки.
  */
 public class Parser {
     private String string;

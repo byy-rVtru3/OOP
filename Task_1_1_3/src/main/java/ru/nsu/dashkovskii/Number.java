@@ -1,11 +1,11 @@
 package ru.nsu.dashkovskii;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 /**
- * Класс, представляющий числовую константу в выражении.
+ * Класс, представляющий числовую константу в ��ыражении.
  */
 public class Number extends Expression {
     private final int value;
