@@ -1,6 +1,7 @@
 package ru.nsu.dashkovskii;
 
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Класс, представляющий операцию вычитания между двумя выражениями.
@@ -18,6 +19,35 @@ public class Sub extends BinaryOperations {
     @Override
     public Expression derivative(String var) {
         return new Sub(left.derivative(var), right.derivative(var));
+    }
+
+    @Override
+    protected Expression simplifyInternal() {
+        Expression leftSimplified = left.simplify();
+        Expression rightSimplified = right.simplify();
+
+        if (leftSimplified.isConstant() && rightSimplified.isConstant()) {
+            try {
+                int result = leftSimplified.evaluate(new HashMap<>()) - rightSimplified.evaluate(new HashMap<>());
+                return new Number(result);
+            } catch (Exception e) {
+                // Если не удалось вычислить, возвращаем упрощенное выражение
+            }
+        }
+
+        if (rightSimplified instanceof Number && ((Number) rightSimplified).getValue() == 0) {
+            return leftSimplified;
+        }
+
+        if (leftSimplified.isEqual(rightSimplified)) {
+            return new Number(0);
+        }
+
+        if (leftSimplified != left || rightSimplified != right) {
+            return new Sub(leftSimplified, rightSimplified);
+        }
+
+        return this;
     }
 
     @Override

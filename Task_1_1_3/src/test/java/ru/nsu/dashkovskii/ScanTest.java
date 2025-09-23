@@ -2,26 +2,22 @@ package ru.nsu.dashkovskii;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тестовый класс для проверки функциональности класса Scanner.
+ * Тестовый класс для проверки функциональности класса Scan.
  */
-public class ScannerTest {
+public class ScanTest {
 
     /**
      * Тестирует приватный метод isValidVariable с помощью рефлексии.
      */
     @Test
     public void testIsValidVariableName() {
-        Scanner scanner = new Scanner();
+        Scan scanner = new Scan();
 
-        // Используем рефлексию для тестирования приватного метода
         try {
-            java.lang.reflect.Method method = Scanner.class
+            java.lang.reflect.Method method = Scan.class
                     .getDeclaredMethod("isValidVariable", String.class);
             method.setAccessible(true);
 
@@ -43,15 +39,11 @@ public class ScannerTest {
     }
 
     /**
-     * Тестирует создание экземпляра Scanner.
+     * Тестирует создание экземпляра Scan.
      */
     @Test
     public void testScannerCreation() {
-        Scanner scanner = new Scanner();
+        Scan scanner = new Scan();
         assertNotNull(scanner);
     }
-
-    // Примечание: Методы readExpression(), readAssignments() и readDiffVariable()
-    // сложно тестировать unit-тестами, так как они требуют пользовательского ввода.
-    // Для их тестирования потребовались бы моки или интеграционные тесты.
 }

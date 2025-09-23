@@ -60,7 +60,6 @@ public class MulTest {
      */
     @Test
     public void testDerivativeProductRule() {
-        // (x * 3)' = 1*3 + x*0 = 3
         Mul mul = new Mul(new Variable("x"), new Number(3));
         Expression derivative = mul.derivative("x");
 
@@ -74,7 +73,6 @@ public class MulTest {
      */
     @Test
     public void testDerivativeTwoVariables() {
-        // (x * y)' по x = 1*y + x*0 = y
         Mul mul = new Mul(new Variable("x"), new Variable("y"));
         Expression derivative = mul.derivative("x");
 

@@ -1,6 +1,8 @@
 package ru.nsu.dashkovskii;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Класс, представляющий переменную в математическом выражении.
@@ -27,6 +29,18 @@ public class Variable extends Expression {
         } else {
             return new Number(0);
         }
+    }
+
+    @Override
+    public Set<String> getVariables() {
+        Set<String> vars = new HashSet<>();
+        vars.add(name);
+        return vars;
+    }
+
+    @Override
+    protected Expression simplifyInternal() {
+        return this; // Переменные не упрощаются
     }
 
     @Override

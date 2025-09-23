@@ -10,7 +10,7 @@ public class Main {
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner();
+        Scan scanner = new Scan();
 
         try {
             String exprStr = scanner.readExpression();

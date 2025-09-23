@@ -27,50 +27,51 @@ public class Parser {
             throw new IllegalArgumentException("Некорректная расстановка скобок");
         }
 
-        if (s.startsWith("(") && s.endsWith(")")) {
-            // Убираем внешние скобки и ищем главный оператор
-            int depth = 0;
-            boolean foundOperator = false;
+        return parseExpression(s);
+    }
 
-            for (int i = 1; i < s.length() - 1; ++i) {
-                char c = s.charAt(i);
-                if (c == '(') {
-                    depth++;
-                }
-                if (c == ')') {
-                    depth--;
-                }
-                if (depth == 0 && (c == '+' || c == '-' || c == '*' || c == '/')) {
-                    foundOperator = true;
-                    String leftStr = s.substring(1, i).trim();
-                    String rightStr = s.substring(i + 1, s.length() - 1).trim();
+    /**
+     * Парсит выражение с учетом приоритета операций.
+     */
+    private static Expression parseExpression(String s) {
+        s = s.trim();
 
-                    if (leftStr.isEmpty() || rightStr.isEmpty()) {
-                        throw new IllegalArgumentException(
-                                "Отсутствует операнд рядом с оператором '" + c + "'");
-                    }
+        while (s.startsWith("(") && s.endsWith(")") && isMatchingParentheses(s, 0, s.length() - 1)) {
+            s = s.substring(1, s.length() - 1).trim();
+        }
 
-                    Expression left = parse(leftStr);
-                    Expression right = parse(rightStr);
+        int operatorPos = findOperator(s, new char[]{'+', '-'});
+        if (operatorPos != -1) {
+            char operator = s.charAt(operatorPos);
+            String leftStr = s.substring(0, operatorPos).trim();
+            String rightStr = s.substring(operatorPos + 1).trim();
 
-                    switch (c) {
-                        case '+':
-                            return new Add(left, right);
-                        case '-':
-                            return new Sub(left, right);
-                        case '*':
-                            return new Mul(left, right);
-                        case '/':
-                            return new Div(left, right);
-                        default:
-                            throw new IllegalArgumentException("Неизвестный оператор: " + c);
-                    }
-                }
+            if (leftStr.isEmpty() || rightStr.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "Отсутствует операнд рядом с оператором '" + operator + "'");
             }
 
-            if (!foundOperator) {
-                return parse(s.substring(1, s.length() - 1));
+            Expression left = parseExpression(leftStr);
+            Expression right = parseExpression(rightStr);
+
+            return operator == '+' ? new Add(left, right) : new Sub(left, right);
+        }
+
+        operatorPos = findOperator(s, new char[]{'*', '/'});
+        if (operatorPos != -1) {
+            char operator = s.charAt(operatorPos);
+            String leftStr = s.substring(0, operatorPos).trim();
+            String rightStr = s.substring(operatorPos + 1).trim();
+
+            if (leftStr.isEmpty() || rightStr.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "Отсутствует операнд рядом с оператором '" + operator + "'");
             }
+
+            Expression left = parseExpression(leftStr);
+            Expression right = parseExpression(rightStr);
+
+            return operator == '*' ? new Mul(left, right) : new Div(left, right);
         }
 
         if (isValidVariable(s)) {
@@ -82,6 +83,53 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Некорректное число: '" + s + "'", e);
         }
+    }
+
+    /**
+     * Находит позицию оператора с наименьшим приоритетом, не находящегося в скобках.
+     */
+    private static int findOperator(String s, char[] operators) {
+        int depth = 0;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == ')') {
+                depth++;
+            } else if (c == '(') {
+                depth--;
+            } else if (depth == 0) {
+                for (char op : operators) {
+                    if (c == op) {
+                        return i;
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Проверяет, соответствуют ли скобки на позициях start и end.
+     */
+    private static boolean isMatchingParentheses(String s, int start, int end) {
+        if (s.charAt(start) != '(' || s.charAt(end) != ')') {
+            return false;
+        }
+
+        int depth = 0;
+        for (int i = start; i <= end; i++) {
+            if (s.charAt(i) == '(') {
+                depth++;
+            } else if (s.charAt(i) == ')') {
+                depth--;
+                if (depth == 0 && i < end) {
+                    return false;
+                }
+            }
+        }
+
+        return depth == 0;
     }
 
     /**

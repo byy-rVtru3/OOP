@@ -1,17 +1,18 @@
 package ru.nsu.dashkovskii;
 
 import java.util.Map;
-import org.junit.jupiter.api.Test;
+import java.util.Set;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тестовый класс для проверки функциональности абстрактного класса BinaryOperations.
  */
 public class BinaryOperationsTest {
 
-    // Тестовая реализация BinaryOperations для проверки базового функционала
     private static class TestBinaryOperation extends BinaryOperations {
         public TestBinaryOperation(Expression left, Expression right) {
             super(left, right);
@@ -25,6 +26,11 @@ public class BinaryOperationsTest {
         @Override
         public Expression derivative(String var) {
             return new Number(0); // Упрощенная реализация для теста
+        }
+
+        @Override
+        protected Expression simplifyInternal() {
+            return this; // Упрощенная реализация для теста
         }
 
         @Override
@@ -63,5 +69,45 @@ public class BinaryOperationsTest {
 
         assertNotNull(op);
         assertEquals("(5*x)", op.toString());
+    }
+
+    /**
+     * Тестирует получение переменных из бинарной операции.
+     */
+    @Test
+    public void testGetVariables() {
+        BinaryOperations op = new TestBinaryOperation(new Variable("x"), new Variable("y"));
+        Set<String> variables = op.getVariables();
+
+        assertEquals(2, variables.size());
+        assertTrue(variables.contains("x"));
+        assertTrue(variables.contains("y"));
+    }
+
+    /**
+     * Тестирует получение переменных из бинарной операции с константами.
+     */
+    @Test
+    public void testGetVariablesWithConstants() {
+        BinaryOperations op = new TestBinaryOperation(new Number(5), new Variable("x"));
+        Set<String> variables = op.getVariables();
+
+        assertEquals(1, variables.size());
+        assertTrue(variables.contains("x"));
+    }
+
+    /**
+     * Тестирует получение переменных из вложенных бинарных операций.
+     */
+    @Test
+    public void testGetVariablesNested() {
+        BinaryOperations inner = new TestBinaryOperation(new Variable("x"), new Variable("y"));
+        BinaryOperations outer = new TestBinaryOperation(inner, new Variable("z"));
+        Set<String> variables = outer.getVariables();
+
+        assertEquals(3, variables.size());
+        assertTrue(variables.contains("x"));
+        assertTrue(variables.contains("y"));
+        assertTrue(variables.contains("z"));
     }
 }

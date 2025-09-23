@@ -1,10 +1,12 @@
 package ru.nsu.dashkovskii;
 
+import java.util.Scanner;
+
 /**
  * Класс для чтения пользовательского ввода с консоли.
  */
-public class Scanner {
-    private final java.util.Scanner scanner = new java.util.Scanner(System.in);
+public class Scan {
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Читает математическое выражение с консоли с валидацией.
@@ -74,7 +76,7 @@ public class Scanner {
             if (!isValidVariable(input)) {
                 System.out.println(
                         "Ошибка: Некорректное имя переменной. Переменная должна "
-                        + "начинаться с буквы и содержать только буквы и цифры.");
+                                + "начинаться с буквы и содержать только буквы и цифры.");
                 continue;
             }
 

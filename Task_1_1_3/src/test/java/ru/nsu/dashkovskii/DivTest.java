@@ -61,13 +61,11 @@ public class DivTest {
      */
     @Test
     public void testDerivative() {
-        // (x/2)' = (1*2 - x*0)/(2*2) = 2/4
         Div div = new Div(new Variable("x"), new Number(2));
         Expression derivative = div.derivative("x");
 
         Map<String, Integer> vars = new HashMap<>();
         vars.put("x", 10);
-        // Производная x/2 по x должна быть 1/2, но так как работаем с int, получается 0
         assertEquals(0, derivative.evaluate(vars));
     }
 

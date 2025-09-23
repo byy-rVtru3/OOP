@@ -59,7 +59,6 @@ public class SubTest {
      */
     @Test
     public void testDerivative() {
-        // (x - 5)' = 1 - 0
         Sub sub = new Sub(new Variable("x"), new Number(5));
         Expression derivative = sub.derivative("x");
 
@@ -73,7 +72,6 @@ public class SubTest {
      */
     @Test
     public void testDerivativeTwoVariables() {
-        // (x - y)' по x = 1 - 0
         Sub sub = new Sub(new Variable("x"), new Variable("y"));
         Expression derivative = sub.derivative("x");
 

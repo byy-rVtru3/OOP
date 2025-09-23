@@ -1,5 +1,8 @@
 package ru.nsu.dashkovskii;
 
+import java.util.Set;
+import java.util.HashSet;
+
 /**
  * Абстрактный класс для бинарных операций над выражениями.
  * Содержит левый и правый операнды.
@@ -11,6 +14,14 @@ public abstract class BinaryOperations extends Expression {
     public BinaryOperations(Expression left, Expression right) {
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public Set<String> getVariables() {
+        Set<String> vars = new HashSet<>();
+        vars.addAll(left.getVariables());
+        vars.addAll(right.getVariables());
+        return vars;
     }
 
     @Override
