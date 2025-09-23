@@ -1,11 +1,10 @@
 package ru.nsu.dashkovskii;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Тестовый класс для проверки функциональности класса Sub.
@@ -46,7 +45,7 @@ public class SubTest {
     }
 
     /**
-     * Тестиру��т вычитание с отрицательным результатом.
+     * Тестирует вычитание с отрицательным результатом.
      */
     @Test
     public void testEvaluateNegativeResult() {

@@ -1,12 +1,11 @@
 package ru.nsu.dashkovskii;
 
-import java.util.Map;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 /**
  * Тестовый класс для проверки функциональности класса Parser.
@@ -68,7 +67,7 @@ public class ParserTest {
     }
 
     /**
-     * Тестиру��т парсинг вложенного выражения.
+     * Тестирует парсинг вложенного выражения.
      */
     @Test
     public void testParseNestedExpression() {
