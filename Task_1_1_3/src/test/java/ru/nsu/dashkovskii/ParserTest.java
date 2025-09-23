@@ -1,6 +1,7 @@
 package ru.nsu.dashkovskii;
 
 import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -67,7 +68,7 @@ public class ParserTest {
     }
 
     /**
-     * Тестирует парсинг вложенного выражения.
+     * Тестиру��т парсинг вложенного выражения.
      */
     @Test
     public void testParseNestedExpression() {

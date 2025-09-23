@@ -2,6 +2,7 @@ package ru.nsu.dashkovskii;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,7 @@ public class AddTest {
     }
 
     /**
-     * Тестирует сложение переменной и числовой константы.
+     * Тестирует сложение переменной и числовой кон��танты.
      */
     @Test
     public void testEvaluateWithVariables() {
@@ -107,7 +108,7 @@ public class AddTest {
     }
 
     /**
-     * Тестирует сложение с отрицательными числами.
+     * Тестиру��т сложение с отрицательными числами.
      */
     @Test
     public void testEvaluateNegativeNumbers() {

@@ -1,8 +1,8 @@
 package ru.nsu.dashkovskii;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 /**
  * Класс, представляющий переменную в математическом выражении.
