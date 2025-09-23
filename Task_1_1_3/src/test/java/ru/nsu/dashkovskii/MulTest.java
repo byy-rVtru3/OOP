@@ -60,6 +60,7 @@ public class MulTest {
      */
     @Test
     public void testDerivativeProductRule() {
+        // d/dx(x * 3) = 1 * 3 + x * 0 = 3
         Mul mul = new Mul(new Variable("x"), new Number(3));
         Expression derivative = mul.derivative("x");
 
@@ -73,6 +74,7 @@ public class MulTest {
      */
     @Test
     public void testDerivativeTwoVariables() {
+        // d/dx(x * y) = 1 * y + x * 0 = y
         Mul mul = new Mul(new Variable("x"), new Variable("y"));
         Expression derivative = mul.derivative("x");
 
@@ -80,6 +82,27 @@ public class MulTest {
         vars.put("x", 5);
         vars.put("y", 7);
         assertEquals(7, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует упрощение умножения.
+     */
+    @Test
+    public void testSimplification() {
+        // Умножение на 0 должно упрощаться до 0
+        Mul mul1 = new Mul(new Variable("x"), new Number(0));
+        Expression simplified1 = mul1.simplify();
+        assertEquals("0", simplified1.toString());
+
+        // Умножение на 1 должно упрощаться до переменной
+        Mul mul2 = new Mul(new Variable("x"), new Number(1));
+        Expression simplified2 = mul2.simplify();
+        assertEquals("x", simplified2.toString());
+
+        // Умножение констант должно вычисляться
+        Mul mul3 = new Mul(new Number(2), new Number(3));
+        Expression simplified3 = mul3.simplify();
+        assertEquals("6", simplified3.toString());
     }
 
     /**

@@ -57,16 +57,56 @@ public class DivTest {
     }
 
     /**
-     * Тестирует взятие производной от частного.
+     * Тестирует взятие производной от частного x/2 по x.
+     * Производная от x/2 по x равна 1/2, но результат вычисляется по формуле частного.
      */
     @Test
     public void testDerivative() {
+        // d/dx(x/2) = (1*2 - x*0)/(2*2) = 2/4 = 0 (в целочисленной арифметике)
         Div div = new Div(new Variable("x"), new Number(2));
         Expression derivative = div.derivative("x");
 
         Map<String, Integer> vars = new HashMap<>();
         vars.put("x", 10);
+        // Производная x/2 по формуле частного: (1*2 - x*0)/(2*2) = 2/4 = 0
         assertEquals(0, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует взятие производной от частного двух переменных.
+     */
+    @Test
+    public void testDerivativeTwoVariables() {
+        // d/dx(x/y) = (1*y - x*0)/(y*y) = y/(y*y) = 1/y
+        Div div = new Div(new Variable("x"), new Variable("y"));
+        Expression derivative = div.derivative("x");
+
+        Map<String, Integer> vars = new HashMap<>();
+        vars.put("x", 10);
+        vars.put("y", 5);
+        // Результат: y/(y*y) = 5/25 = 0 (в целочисленной арифметике)
+        assertEquals(0, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует упрощение деления.
+     */
+    @Test
+    public void testSimplification() {
+        // Деление на 1 должно упрощаться до левого операнда
+        Div div1 = new Div(new Variable("x"), new Number(1));
+        Expression simplified1 = div1.simplify();
+        assertEquals("x", simplified1.toString());
+
+        // 0/x должно упрощаться до 0
+        Div div2 = new Div(new Number(0), new Variable("x"));
+        Expression simplified2 = div2.simplify();
+        assertEquals("0", simplified2.toString());
+
+        // x/x должно упрощаться до 1
+        Div div3 = new Div(new Variable("x"), new Variable("x"));
+        Expression simplified3 = div3.simplify();
+        assertEquals("1", simplified3.toString());
     }
 
     /**
