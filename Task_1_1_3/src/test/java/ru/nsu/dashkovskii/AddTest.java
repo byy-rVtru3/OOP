@@ -81,4 +81,73 @@ public class AddTest {
         Add add = new Add(new Number(3), new Variable("x"));
         assertEquals("(3+x)", add.toString());
     }
+
+    /**
+     * Тестирует упрощение сложения с нулем.
+     */
+    @Test
+    public void testSimplificationWithZero() {
+        Add add1 = new Add(new Variable("x"), new Number(0));
+        Expression simplified1 = add1.simplify();
+        assertEquals("x", simplified1.toString());
+
+        Add add2 = new Add(new Number(0), new Variable("x"));
+        Expression simplified2 = add2.simplify();
+        assertEquals("x", simplified2.toString());
+    }
+
+    /**
+     * Тестирует упрощение сложения двух констант.
+     */
+    @Test
+    public void testSimplificationConstants() {
+        Add add = new Add(new Number(3), new Number(7));
+        Expression simplified = add.simplify();
+        assertEquals("10", simplified.toString());
+    }
+
+    /**
+     * Тестирует сложение с отрицательными числами.
+     */
+    @Test
+    public void testEvaluateNegativeNumbers() {
+        Add add = new Add(new Number(-5), new Number(3));
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(-2, add.evaluate(vars));
+    }
+
+    /**
+     * Тестиру��т производную константы.
+     */
+    @Test
+    public void testDerivativeConstant() {
+        Add add = new Add(new Number(5), new Number(3));
+        Expression derivative = add.derivative("x");
+
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(0, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует производную по переменной, которой нет в выражении.
+     */
+    @Test
+    public void testDerivativeNonExistentVariable() {
+        Add add = new Add(new Variable("x"), new Number(5));
+        Expression derivative = add.derivative("y");
+
+        Map<String, Integer> vars = new HashMap<>();
+        vars.put("x", 10);
+        assertEquals(0, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует сложение больших чисел.
+     */
+    @Test
+    public void testEvaluateLargeNumbers() {
+        Add add = new Add(new Number(1000000), new Number(2000000));
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(3000000, add.evaluate(vars));
+    }
 }
