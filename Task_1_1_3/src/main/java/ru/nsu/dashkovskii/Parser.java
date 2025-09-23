@@ -73,16 +73,15 @@ public class Parser {
             }
         }
 
-        try {
-            return new Number(Integer.parseInt(s));
-        } catch (NumberFormatException ignored) {
-        }
-
         if (isValidVariable(s)) {
             return new Variable(s);
         }
 
-        throw new IllegalArgumentException("Некорректное выражение: '" + s + "'");
+        try {
+            return new Number(Integer.parseInt(s));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Некорректное число: '" + s + "'", e);
+        }
     }
 
     /**
