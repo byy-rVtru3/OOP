@@ -101,7 +101,7 @@ public class ExpressionTest {
         assertTrue(expr.getVariables().contains("y"));
 
         Expression constant = new Number(42);
-        assertTrue(constant.getVariables().isEmpty();
+        assertTrue(constant.getVariables().isEmpty());
     }
 
     /**

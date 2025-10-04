@@ -22,7 +22,7 @@ public class AddTest {
     }
 
     /**
-     * Тестирует сложение переменной и числовой кон��танты.
+     * Тестирует сложение переменной и числовой константы.
      */
     @Test
     public void testEvaluateWithVariables() {

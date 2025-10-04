@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Класс, представляющий числовую константу в ��ыражении.
+ * Класс, представляющий числовую константу в выражении.
  */
 public class Number extends Expression {
     private final int value;
