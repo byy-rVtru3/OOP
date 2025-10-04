@@ -82,4 +82,30 @@ public class VariableTest {
         Variable multiChar = new Variable("foo");
         assertEquals("foo", multiChar.toString());
     }
+
+    /**
+     * Тестирует что производная переменной по себе равна 1.
+     */
+    @Test
+    public void testDerivativeSelf() {
+        Variable var = new Variable("x");
+        Expression derivative = var.derivative("x");
+        
+        // Проверяем, что результат - это Number(1)
+        assertTrue(derivative instanceof Number);
+        assertEquals("1", derivative.toString());
+    }
+
+    /**
+     * Тестирует что производная переменной по другой переменной равна 0.
+     */
+    @Test
+    public void testDerivativeOther() {
+        Variable var = new Variable("x");
+        Expression derivative = var.derivative("y");
+        
+        // Проверяем, что результат - это Number(0)
+        assertTrue(derivative instanceof Number);
+        assertEquals("0", derivative.toString());
+    }
 }

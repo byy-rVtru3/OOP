@@ -27,16 +27,12 @@ public class Sub extends BinaryOperations {
         Expression rightSimplified = right.simplify();
 
         if (leftSimplified.isConstant() && rightSimplified.isConstant()) {
-            try {
-                int result = leftSimplified.evaluate(new HashMap<>())
-                        - rightSimplified.evaluate(new HashMap<>());
-                return new Number(result);
-            } catch (Exception e) {
-                // Если не удалось вычислить, возвращаем упрощенное выражение
-            }
+            int result = leftSimplified.evaluate(new HashMap<>())
+                    - rightSimplified.evaluate(new HashMap<>());
+            return new Number(result);
         }
 
-        if (rightSimplified instanceof Number
+        if (rightSimplified.isConstant()
                 && ((Number) rightSimplified).getValue() == 0) {
             return leftSimplified;
         }
@@ -53,7 +49,7 @@ public class Sub extends BinaryOperations {
     }
 
     @Override
-    protected String getSymbol() {
-        return "-";
+    protected Operator getOperator() {
+        return Operator.SUB;
     }
 }

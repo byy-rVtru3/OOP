@@ -1,6 +1,6 @@
 package ru.nsu.dashkovskii;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class Number extends Expression {
 
     @Override
     public Set<String> getVariables() {
-        return new HashSet<>();
+        return Collections.emptySet();
     }
 
     @Override

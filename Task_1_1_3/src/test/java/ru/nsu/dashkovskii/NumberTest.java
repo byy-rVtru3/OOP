@@ -65,4 +65,20 @@ public class NumberTest {
         Number negNum = new Number(-15);
         assertEquals("-15", negNum.toString());
     }
+
+    /**
+     * Тестирует что производная константы всегда 0.
+     */
+    @Test
+    public void testDerivativeAlwaysZero() {
+        Number num = new Number(42);
+        Expression derivative = num.derivative("x");
+        
+        // Проверяем, что результат - это Number(0)
+        assertTrue(derivative instanceof Number);
+        assertEquals("0", derivative.toString());
+        
+        Map<String, Integer> vars = new HashMap<>();
+        assertEquals(0, derivative.evaluate(vars));
+    }
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class Scan {
     private final Scanner scanner = new Scanner(System.in);
+    private final Parser parser = new Parser();
 
     /**
      * Читает математическое выражение с консоли с валидацией.
@@ -24,7 +25,7 @@ public class Scan {
             }
 
             try {
-                Parser.parse(input);
+                parser.parse(input);
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка парсинга: " + e.getMessage());
@@ -47,7 +48,7 @@ public class Scan {
             String input = scanner.nextLine().trim();
 
             try {
-                Parser.parseAssignments(input);
+                parser.parseAssignments(input);
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage());

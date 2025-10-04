@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Класс для пар��инга математических выражений из строки.
+ * Класс для парсинга математических выражений из строки.
  */
 public class Parser {
-    private String string;
 
     /**
      * Парсит математическое выражение из строки.
@@ -16,7 +15,7 @@ public class Parser {
      * @return объект Expression, представляющий выражение
      * @throws IllegalArgumentException если выражение некорректно
      */
-    public static Expression parse(String s) {
+    public Expression parse(String s) {
         s = s.trim();
 
         if (s.isEmpty()) {
@@ -33,7 +32,7 @@ public class Parser {
     /**
      * Парсит выражение с учетом приоритета операций.
      */
-    private static Expression parseExpression(String s) {
+    private Expression parseExpression(String s) {
         s = s.trim();
 
         while (s.startsWith("(") && s.endsWith(")") && isMatchingParentheses(s, 0, s.length() - 1)) {
@@ -88,7 +87,7 @@ public class Parser {
     /**
      * Находит позицию оператора с наименьшим приоритетом, не находящегося в скобках.
      */
-    private static int findOperator(String s, char[] operators) {
+    private int findOperator(String s, char[] operators) {
         int depth = 0;
 
         for (int i = s.length() - 1; i >= 0; i--) {
@@ -112,7 +111,7 @@ public class Parser {
     /**
      * Проверяет, соответствуют ли скобки на позициях start и end.
      */
-    private static boolean isMatchingParentheses(String s, int start, int end) {
+    private boolean isMatchingParentheses(String s, int start, int end) {
         if (s.charAt(start) != '(' || s.charAt(end) != ')') {
             return false;
         }
@@ -138,7 +137,7 @@ public class Parser {
      * @param s строка для проверки
      * @return true, если скобки расставлены корректно
      */
-    private static boolean isValidParentheses(String s) {
+    private boolean isValidParentheses(String s) {
         int count = 0;
         for (char c : s.toCharArray()) {
             if (c == '(') {
@@ -154,7 +153,7 @@ public class Parser {
         return count == 0;
     }
 
-    private static boolean isValidVariable(String s) {
+    private boolean isValidVariable(String s) {
         if (s.isEmpty()) {
             return false;
         }
@@ -176,7 +175,7 @@ public class Parser {
      * @return карта переменных и их значений
      * @throws IllegalArgumentException если формат присваиваний некорректен
      */
-    public static Map<String, Integer> parseAssignments(String assignments) {
+    public Map<String, Integer> parseAssignments(String assignments) {
         Map<String, Integer> vars = new HashMap<>();
 
         if (assignments == null || assignments.trim().isEmpty()) {

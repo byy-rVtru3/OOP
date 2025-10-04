@@ -1,6 +1,5 @@
 package ru.nsu.dashkovskii;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,9 +32,7 @@ public class Variable extends Expression {
 
     @Override
     public Set<String> getVariables() {
-        Set<String> vars = new HashSet<>();
-        vars.add(name);
-        return vars;
+        return Set.of(name);
     }
 
     @Override

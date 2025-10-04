@@ -33,22 +33,18 @@ public class Div extends BinaryOperations {
         Expression rightSimplified = right.simplify();
 
         if (leftSimplified.isConstant() && rightSimplified.isConstant()) {
-            try {
-                int rightValue = rightSimplified.evaluate(new HashMap<>());
-                if (rightValue != 0) {
-                    int result = leftSimplified.evaluate(new HashMap<>()) / rightValue;
-                    return new Number(result);
-                }
-            } catch (Exception e) {
-                // Если не удалось вычислить, возвращаем упрощенное выражение
+            int rightValue = rightSimplified.evaluate(new HashMap<>());
+            if (rightValue != 0) {
+                int result = leftSimplified.evaluate(new HashMap<>()) / rightValue;
+                return new Number(result);
             }
         }
 
-        if (leftSimplified instanceof Number && ((Number) leftSimplified).getValue() == 0) {
+        if (leftSimplified.isConstant() && ((Number) leftSimplified).getValue() == 0) {
             return new Number(0);
         }
 
-        if (rightSimplified instanceof Number && ((Number) rightSimplified).getValue() == 1) {
+        if (rightSimplified.isConstant() && ((Number) rightSimplified).getValue() == 1) {
             return leftSimplified;
         }
 
@@ -64,7 +60,7 @@ public class Div extends BinaryOperations {
     }
 
     @Override
-    protected String getSymbol() {
-        return "/";
+    protected Operator getOperator() {
+        return Operator.DIV;
     }
 }

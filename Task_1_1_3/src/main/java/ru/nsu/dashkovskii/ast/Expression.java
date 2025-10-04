@@ -9,8 +9,20 @@ import java.util.Set;
  */
 public abstract class Expression {
 
+    /**
+     * Вычисляет значение выражения при заданных значениях переменных.
+     *
+     * @param variables карта переменных и их значений
+     * @return результат вычисления выражения
+     */
     public abstract int evaluate(Map<String, Integer> variables);
 
+    /**
+     * Вычисляет производную выражения по указанной переменной.
+     *
+     * @param var имя переменной, по которой берётся производная
+     * @return выражение, представляющее производную
+     */
     public abstract Expression derivative(String var);
 
     /**
@@ -44,16 +56,13 @@ public abstract class Expression {
     @Override
     public abstract String toString();
 
-    public void print() {
-        System.out.println(this.toString());
-    }
-
     /**
      * Вычисляет выражение при заданных значениях переменных.
      * Строка assignments должна иметь вид: "x = 10; y = 13"
      */
     public int eval(String assignments) {
-        Map<String, Integer> vars = Parser.parseAssignments(assignments);
+        Parser parser = new Parser();
+        Map<String, Integer> vars = parser.parseAssignments(assignments);
         return evaluate(vars);
     }
 }

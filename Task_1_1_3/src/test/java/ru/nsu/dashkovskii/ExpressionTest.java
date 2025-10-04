@@ -52,15 +52,6 @@ public class ExpressionTest {
     }
 
     /**
-     * Тестирует метод print, проверяет отсутствие исключений.
-     */
-    @Test
-    public void testPrint() {
-        Expression expr = new Add(new Number(3), new Variable("x"));
-        assertDoesNotThrow(() -> expr.print());
-    }
-
-    /**
      * Тестирует метод isConstant.
      */
     @Test
@@ -110,6 +101,136 @@ public class ExpressionTest {
         assertTrue(expr.getVariables().contains("y"));
 
         Expression constant = new Number(42);
-        assertTrue(constant.getVariables().isEmpty());
+        assertTrue(constant.getVariables().isEmpty();
+    }
+
+    /**
+     * Тестирует дифференцирование выражений без переменной.
+     */
+    @Test
+    public void testDerivativeConstantExpression() {
+        Expression e = new Add(new Number(3), new Number(5));
+        Expression derivative = e.derivative("x");
+        
+        java.util.Map<String, Integer> vars = new java.util.HashMap<>();
+        assertEquals(0, derivative.evaluate(vars));
+    }
+
+    /**
+     * Тестирует многократное дифференцирование.
+     */
+    @Test
+    public void testMultipleDerivatives() {
+        Expression e = new Variable("x");
+        Expression de1 = e.derivative("x"); // 1
+        Expression de2 = de1.derivative("x"); // 0
+
+        java.util.Map<String, Integer> vars = new java.util.HashMap<>();
+        vars.put("x", 5);
+        assertEquals(1, de1.evaluate(vars));
+        assertEquals(0, de2.evaluate(vars));
+    }
+
+    /**
+     * Тестирует сложное выражение с несколькими переменными.
+     */
+    @Test
+    public void testComplexExpressionEval() {
+        Expression e = new Add(
+            new Mul(new Variable("x"), new Variable("y")),
+            new Div(new Variable("z"), new Number(2))
+        );
+        
+        assertEquals(17, e.eval("x=3; y=4; z=10")); // (3*4 + 10/2) = 12 + 5 = 17
+        assertEquals(4, e.eval("x=0; y=100; z=8")); // (0*100 + 8/2) = 0 + 4 = 4
+    }
+
+    /**
+     * Тестирует переменные в разном порядке.
+     */
+    @Test
+    public void testEvalVariablesInDifferentOrder() {
+        Expression e = new Add(
+            new Mul(new Variable("x"), new Variable("y")),
+            new Div(new Variable("z"), new Number(2))
+        );
+        
+        assertEquals(17, e.eval("z=10; x=3; y=4"));
+    }
+
+    /**
+     * Тестирует лишние переменные.
+     */
+    @Test
+    public void testEvalWithExtraVariables() {
+        Expression e = new Add(
+            new Mul(new Variable("x"), new Variable("y")),
+            new Div(new Variable("z"), new Number(2))
+        );
+        
+        assertEquals(17, e.eval("x=3; y=4; z=10; w=100"));
+    }
+
+    /**
+     * Тестирует ошибку при отсутствии необходимой переменной.
+     */
+    @Test
+    public void testEvalMissingVariable() {
+        Expression e = new Add(
+            new Mul(new Variable("x"), new Variable("y")),
+            new Div(new Variable("z"), new Number(2))
+        );
+        
+        assertThrows(RuntimeException.class, () -> e.eval("x=3; y=4"));
+    }
+
+    /**
+     * Тестирует некорректное означивание - пустое значение.
+     */
+    @Test
+    public void testEvalEmptyValue() {
+        Expression e = new Variable("x");
+        
+        assertThrows(IllegalArgumentException.class, () -> e.eval("x=; y=5"));
+    }
+
+    /**
+     * Тестирует некорректное означивание - не число.
+     */
+    @Test
+    public void testEvalNonNumericValue() {
+        Expression e = new Variable("x");
+        
+        assertThrows(IllegalArgumentException.class, () -> e.eval("x=abc"));
+    }
+
+    /**
+     * Тестирует некорректное означивание - нет разделителя.
+     */
+    @Test
+    public void testEvalNoSeparator() {
+        Expression e = new Variable("x");
+        
+        assertThrows(IllegalArgumentException.class, () -> e.eval("x=5 y=3"));
+    }
+
+    /**
+     * Тестирует парсинг с лишними пробелами и разделителями.
+     */
+    @Test
+    public void testEvalWithExtraSpacesAndSeparators() {
+        Expression e = new Add(new Variable("x"), new Variable("y"));
+        
+        assertEquals(7, e.eval(" x = 3 ; y = 4 ; ; "));
+    }
+
+    /**
+     * Тестирует парсинг с нестандартными разделителями.
+     */
+    @Test
+    public void testEvalWithCommaDelimiter() {
+        Expression e = new Variable("x");
+        
+        assertThrows(IllegalArgumentException.class, () -> e.eval("x=3, y=4"));
     }
 }

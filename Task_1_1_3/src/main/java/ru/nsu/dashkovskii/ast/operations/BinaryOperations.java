@@ -10,24 +10,25 @@ import java.util.Set;
 public abstract class BinaryOperations extends Expression {
     protected final Expression left;
     protected final Expression right;
+    private final Set<String> variables;
 
     public BinaryOperations(Expression left, Expression right) {
         this.left = left;
         this.right = right;
+        this.variables = new HashSet<>();
+        this.variables.addAll(left.getVariables());
+        this.variables.addAll(right.getVariables());
     }
 
     @Override
     public Set<String> getVariables() {
-        Set<String> vars = new HashSet<>();
-        vars.addAll(left.getVariables());
-        vars.addAll(right.getVariables());
-        return vars;
+        return variables;
     }
 
     @Override
     public String toString() {
-        return "(" + left.toString() + getSymbol() + right.toString() + ")";
+        return "(" + left.toString() + getOperator().getSymbol() + right.toString() + ")";
     }
 
-    protected abstract String getSymbol();
+    protected abstract Operator getOperator();
 }

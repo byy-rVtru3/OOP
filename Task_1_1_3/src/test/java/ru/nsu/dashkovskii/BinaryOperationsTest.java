@@ -36,8 +36,8 @@ public class BinaryOperationsTest {
         }
 
         @Override
-        protected String getSymbol() {
-            return "*";
+        protected Operator getOperator() {
+            return Operator.MUL;
         }
     }
 
