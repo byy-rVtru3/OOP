@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.dashkovskii.parcer.Sсan;
+import ru.nsu.dashkovskii.parcer.Scan;
 
 /**
  * Тестовый класс для проверки функциональности класса Skan.
@@ -18,10 +18,10 @@ public class SkanTest {
      */
     @Test
     public void testIsValidVariableName() {
-        Sсan scanner = new Sсan();
+        Scan scanner = new Scan();
 
         try {
-            java.lang.reflect.Method method = Sсan.class
+            java.lang.reflect.Method method = Scan.class
                     .getDeclaredMethod("isValidVariable", String.class);
             method.setAccessible(true);
 
@@ -47,7 +47,7 @@ public class SkanTest {
      */
     @Test
     public void testScannerCreation() {
-        Sсan scanner = new Sсan();
+        Scan scanner = new Scan();
         assertNotNull(scanner);
     }
 }
