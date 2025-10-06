@@ -11,8 +11,8 @@ import ru.nsu.dashkovskii.ast.Expression;
 import ru.nsu.dashkovskii.ast.Number;
 import ru.nsu.dashkovskii.ast.Variable;
 import ru.nsu.dashkovskii.ast.operations.Add;
-import ru.nsu.dashkovskii.ast.operations.Mul;
 import ru.nsu.dashkovskii.ast.operations.Div;
+import ru.nsu.dashkovskii.ast.operations.Mul;
 
 /**
  * Тестовый класс для проверки функциональности абстрактного класса Expression.
@@ -118,7 +118,7 @@ public class ExpressionTest {
     public void testDerivativeConstantExpression() {
         Expression e = new Add(new Number(3), new Number(5));
         Expression derivative = e.derivative("x");
-        
+
         java.util.Map<String, Integer> vars = new java.util.HashMap<>();
         assertEquals(0, derivative.evaluate(vars));
     }
@@ -147,7 +147,7 @@ public class ExpressionTest {
             new Mul(new Variable("x"), new Variable("y")),
             new Div(new Variable("z"), new Number(2))
         );
-        
+
         assertEquals(17, e.eval("x=3; y=4; z=10")); // (3*4 + 10/2) = 12 + 5 = 17
         assertEquals(4, e.eval("x=0; y=100; z=8")); // (0*100 + 8/2) = 0 + 4 = 4
     }
@@ -161,7 +161,7 @@ public class ExpressionTest {
             new Mul(new Variable("x"), new Variable("y")),
             new Div(new Variable("z"), new Number(2))
         );
-        
+
         assertEquals(17, e.eval("z=10; x=3; y=4"));
     }
 
@@ -174,7 +174,7 @@ public class ExpressionTest {
             new Mul(new Variable("x"), new Variable("y")),
             new Div(new Variable("z"), new Number(2))
         );
-        
+
         assertEquals(17, e.eval("x=3; y=4; z=10; w=100"));
     }
 
@@ -187,7 +187,7 @@ public class ExpressionTest {
             new Mul(new Variable("x"), new Variable("y")),
             new Div(new Variable("z"), new Number(2))
         );
-        
+
         assertThrows(RuntimeException.class, () -> e.eval("x=3; y=4"));
     }
 
@@ -197,7 +197,7 @@ public class ExpressionTest {
     @Test
     public void testEvalEmptyValue() {
         Expression e = new Variable("x");
-        
+
         assertThrows(IllegalArgumentException.class, () -> e.eval("x=; y=5"));
     }
 
@@ -207,7 +207,7 @@ public class ExpressionTest {
     @Test
     public void testEvalNonNumericValue() {
         Expression e = new Variable("x");
-        
+
         assertThrows(IllegalArgumentException.class, () -> e.eval("x=abc"));
     }
 
@@ -217,7 +217,7 @@ public class ExpressionTest {
     @Test
     public void testEvalNoSeparator() {
         Expression e = new Variable("x");
-        
+
         assertThrows(IllegalArgumentException.class, () -> e.eval("x=5 y=3"));
     }
 
@@ -227,7 +227,7 @@ public class ExpressionTest {
     @Test
     public void testEvalWithExtraSpacesAndSeparators() {
         Expression e = new Add(new Variable("x"), new Variable("y"));
-        
+
         assertEquals(7, e.eval(" x = 3 ; y = 4 ; ; "));
     }
 
@@ -237,7 +237,7 @@ public class ExpressionTest {
     @Test
     public void testEvalWithCommaDelimiter() {
         Expression e = new Variable("x");
-        
+
         assertThrows(IllegalArgumentException.class, () -> e.eval("x=3, y=4"));
     }
 }

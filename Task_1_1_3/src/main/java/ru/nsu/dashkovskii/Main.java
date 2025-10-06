@@ -1,8 +1,8 @@
 package ru.nsu.dashkovskii;
 
 import ru.nsu.dashkovskii.ast.Expression;
-import ru.nsu.dashkovskii.parcer.Sсan;
 import ru.nsu.dashkovskii.parcer.Papcep;
+import ru.nsu.dashkovskii.parcer.Scan;
 
 /**
  * Главный класс приложения для работы с математическими выражениями.
@@ -14,7 +14,7 @@ public class Main {
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-        Sсan scanner = new Sсan();
+        Scan scanner = new Scan();
         Papcep parser = new Papcep();
 
         try {

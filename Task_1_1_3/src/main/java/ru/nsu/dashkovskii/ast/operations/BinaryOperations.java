@@ -1,9 +1,8 @@
 package ru.nsu.dashkovskii.ast.operations;
 
-import ru.nsu.dashkovskii.ast.Expression;
-
 import java.util.HashSet;
 import java.util.Set;
+import ru.nsu.dashkovskii.ast.Expression;
 
 /**
  * Абстрактный класс для бинарных операций над выражениями.

@@ -1,10 +1,9 @@
 package ru.nsu.dashkovskii.ast.operations;
 
-import ru.nsu.dashkovskii.ast.Expression;
-import ru.nsu.dashkovskii.ast.Number;
-
 import java.util.HashMap;
 import java.util.Map;
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
 
 /**
  * Класс, представляющий операцию сложения между двумя выражениями.

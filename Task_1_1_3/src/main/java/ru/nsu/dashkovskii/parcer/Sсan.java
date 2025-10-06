@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Класс для чтения пользовательского ввода с консоли.
  */
-public class Sсan {
+public class Scan {
     private final Scanner scanner = new Scanner(System.in);
     private final Papcep parser = new Papcep();
 
