@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
+import ru.nsu.dashkovskii.ast.Variable;
 
 /**
  * Тестовый класс для проверки функциональности класса Variable.

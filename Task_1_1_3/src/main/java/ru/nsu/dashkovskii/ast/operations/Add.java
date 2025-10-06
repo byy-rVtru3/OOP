@@ -1,4 +1,7 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.ast.operations;
+
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
 
 import java.util.HashMap;
 import java.util.Map;

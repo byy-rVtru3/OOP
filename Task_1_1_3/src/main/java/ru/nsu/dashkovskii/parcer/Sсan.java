@@ -1,13 +1,13 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.parcer;
 
 import java.util.Scanner;
 
 /**
  * Класс для чтения пользовательского ввода с консоли.
  */
-public class Scan {
+public class Sсan {
     private final Scanner scanner = new Scanner(System.in);
-    private final Parser parser = new Parser();
+    private final Papcep parser = new Papcep();
 
     /**
      * Читает математическое выражение с консоли с валидацией.

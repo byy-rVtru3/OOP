@@ -1,4 +1,7 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.ast.operations;
+
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +16,10 @@ public class Div extends BinaryOperations {
 
     @Override
     public int evaluate(Map<String, Integer> variables) {
+        int delitel = right.evaluate(variables);
+        if (delitel == 0) {
+            throw new ArithmeticException("Division by zero");
+        }
         return left.evaluate(variables) / right.evaluate(variables);
     }
 

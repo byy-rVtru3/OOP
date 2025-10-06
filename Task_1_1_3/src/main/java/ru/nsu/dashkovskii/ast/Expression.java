@@ -1,7 +1,8 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.ast;
 
 import java.util.Map;
 import java.util.Set;
+import ru.nsu.dashkovskii.parcer.Papcep;
 
 /**
  * Абстрактный класс для математических выражений.
@@ -61,7 +62,7 @@ public abstract class Expression {
      * Строка assignments должна иметь вид: "x = 10; y = 13"
      */
     public int eval(String assignments) {
-        Parser parser = new Parser();
+        Papcep parser = new Papcep();
         Map<String, Integer> vars = parser.parseAssignments(assignments);
         return evaluate(vars);
     }

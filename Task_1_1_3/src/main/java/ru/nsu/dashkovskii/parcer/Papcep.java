@@ -1,4 +1,12 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.parcer;
+
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
+import ru.nsu.dashkovskii.ast.Variable;
+import ru.nsu.dashkovskii.ast.operations.Add;
+import ru.nsu.dashkovskii.ast.operations.Div;
+import ru.nsu.dashkovskii.ast.operations.Mul;
+import ru.nsu.dashkovskii.ast.operations.Sub;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +14,7 @@ import java.util.Map;
 /**
  * Класс для парсинга математических выражений из строки.
  */
-public class Parser {
+public class Papcep {
 
     /**
      * Парсит математическое выражение из строки.

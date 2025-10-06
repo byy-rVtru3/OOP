@@ -1,5 +1,9 @@
 package ru.nsu.dashkovskii;
 
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.parcer.Sсan;
+import ru.nsu.dashkovskii.parcer.Papcep;
+
 /**
  * Главный класс приложения для работы с математическими выражениями.
  */
@@ -10,8 +14,8 @@ public class Main {
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-        Scan scanner = new Scan();
-        Parser parser = new Parser();
+        Sсan scanner = new Sсan();
+        Papcep parser = new Papcep();
 
         try {
             String exprStr = scanner.readExpression();
@@ -32,6 +36,10 @@ public class Main {
             int diffResult = de.eval(assignments);
             System.out.println("Значение производной: " + diffResult);
 
+
+        } catch (ArithmeticException e) {
+            System.out.println("Ошибка: Деление на ноль при вычислении выражения.");
+            System.out.println("Программа завершена.");
         } catch (Exception e) {
             System.out.println("Критическая ошибка: " + e.getMessage());
             System.out.println("Программа завершена.");

@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.dashkovskii.parcer.Papcep;
+import ru.nsu.dashkovskii.ast.Expression;
 
 /**
- * Тестовый класс для проверки функциональности класса Parser.
+ * Тестовый класс для проверки функциональности класса TTapcep.
  */
 public class ParserTest {
 
-    private final Parser parser = new Parser();
+    private final Papcep parser = new Papcep();
 
     /**
      * Тестирует парсинг числовой константы.

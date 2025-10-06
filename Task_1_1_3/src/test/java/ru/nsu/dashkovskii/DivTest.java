@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
+import ru.nsu.dashkovskii.ast.Variable;
+import ru.nsu.dashkovskii.ast.operations.Div;
 
 /**
  * Тестовый класс для проверки функциональности класса Div.

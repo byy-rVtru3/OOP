@@ -1,4 +1,6 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.ast.operations;
+
+import ru.nsu.dashkovskii.ast.Expression;
 
 import java.util.HashSet;
 import java.util.Set;

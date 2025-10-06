@@ -7,6 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
+import ru.nsu.dashkovskii.ast.Variable;
+import ru.nsu.dashkovskii.ast.operations.Add;
+import ru.nsu.dashkovskii.ast.operations.Mul;
+import ru.nsu.dashkovskii.ast.operations.Div;
 
 /**
  * Тестовый класс для проверки функциональности абстрактного класса Expression.

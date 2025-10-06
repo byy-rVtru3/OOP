@@ -9,6 +9,12 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.dashkovskii.ast.Expression;
+import ru.nsu.dashkovskii.ast.Number;
+import ru.nsu.dashkovskii.ast.Variable;
+import ru.nsu.dashkovskii.ast.operations.Add;
+import ru.nsu.dashkovskii.ast.operations.BinaryOperations;
+import ru.nsu.dashkovskii.ast.operations.Operator;
 
 /**
  * Тестовый класс для проверки функциональности абстрактного класса BinaryOperations.

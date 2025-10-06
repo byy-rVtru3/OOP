@@ -1,4 +1,4 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.ast.operations;
 
 /**
  * Перечисление операторов для бинарных операций.
