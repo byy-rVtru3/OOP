@@ -1,17 +1,18 @@
 package ru.nsu.dashkovskii.reader;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.dashkovskii.graph.Graph;
 import ru.nsu.dashkovskii.graph.impl.AdjacencyListGraph;
 import ru.nsu.dashkovskii.model.Vertex;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса GraphReader.

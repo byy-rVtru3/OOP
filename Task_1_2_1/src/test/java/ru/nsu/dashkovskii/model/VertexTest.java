@@ -1,7 +1,10 @@
 package ru.nsu.dashkovskii.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса Vertex.
@@ -63,5 +66,11 @@ class VertexTest {
     void testVertexNotEqualToDifferentType() {
         Vertex vertex = new Vertex("A");
         assertNotEquals("A", vertex);
+    }
+
+    @Test
+    void testVertexEqualsSameInstance() {
+        Vertex vertex = new Vertex("A");
+        assertEquals(vertex, vertex);
     }
 }

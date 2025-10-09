@@ -1,7 +1,10 @@
 package ru.nsu.dashkovskii.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса Edge.
@@ -90,5 +93,32 @@ class EdgeTest {
         Edge e2 = new Edge(v1, v2, 5);
 
         assertEquals(e1.hashCode(), e2.hashCode());
+    }
+
+    @Test
+    void testEdgeEqualsSameInstance() {
+        Vertex v1 = new Vertex("A");
+        Vertex v2 = new Vertex("B");
+        Edge edge = new Edge(v1, v2, 5);
+
+        assertEquals(edge, edge);
+    }
+
+    @Test
+    void testEdgeNotEqualToNull() {
+        Vertex v1 = new Vertex("A");
+        Vertex v2 = new Vertex("B");
+        Edge edge = new Edge(v1, v2, 5);
+
+        assertNotEquals(null, edge);
+    }
+
+    @Test
+    void testEdgeNotEqualToDifferentType() {
+        Vertex v1 = new Vertex("A");
+        Vertex v2 = new Vertex("B");
+        Edge edge = new Edge(v1, v2, 5);
+
+        assertNotEquals("edge", edge);
     }
 }

@@ -1,14 +1,15 @@
 package ru.nsu.dashkovskii.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.dashkovskii.graph.Graph;
 import ru.nsu.dashkovskii.graph.impl.AdjacencyListGraph;
 import ru.nsu.dashkovskii.model.Vertex;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса KhanTopologicalSort.

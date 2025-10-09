@@ -1,15 +1,18 @@
 package ru.nsu.dashkovskii.graph.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.dashkovskii.graph.Graph;
 import ru.nsu.dashkovskii.model.Edge;
 import ru.nsu.dashkovskii.model.Vertex;
 import ru.nsu.dashkovskii.strategy.DfsTopologicalSort;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса AdjacencyListGraph.
@@ -138,7 +141,7 @@ class AdjacencyListGraphTest {
 
     @Test
     void testEqualsGraph() {
-        Graph graph2 = new AdjacencyMatrixGraph(true);
+        final Graph graph2 = new AdjacencyMatrixGraph(true);
         
         graph.addVertex(v1);
         graph.addVertex(v2);
@@ -177,5 +180,77 @@ class AdjacencyListGraphTest {
         String result = graph.toString();
         assertNotNull(result);
         assertTrue(result.contains("AdjacencyListGraph"));
+    }
+
+    @Test
+    void testAddNullVertex() {
+        graph.addVertex(null);
+        assertEquals(0, graph.getVertexCount());
+    }
+
+    @Test
+    void testAddNullEdge() {
+        graph.addEdge(null);
+        assertEquals(0, graph.getEdgeCount());
+    }
+
+    @Test
+    void testRemoveNullVertex() {
+        graph.addVertex(v1);
+        graph.removeVertex(null);
+        assertEquals(1, graph.getVertexCount());
+    }
+
+    @Test
+    void testRemoveNullEdge() {
+        graph.addEdge(new Edge(v1, v2));
+        graph.removeEdge(null);
+        assertEquals(1, graph.getEdgeCount());
+    }
+
+    @Test
+    void testRemoveNonExistentVertex() {
+        graph.addVertex(v1);
+        graph.removeVertex(v2);
+        assertEquals(1, graph.getVertexCount());
+    }
+
+    @Test
+    void testRemoveNonExistentEdge() {
+        graph.addEdge(new Edge(v1, v2));
+        graph.removeEdge(new Edge(v2, v3));
+        assertEquals(1, graph.getEdgeCount());
+    }
+
+    @Test
+    void testGetNeighborsOfNonExistentVertex() {
+        List<Vertex> neighbors = graph.getNeighbors(v1);
+        assertTrue(neighbors.isEmpty());
+    }
+
+    @Test
+    void testContainsNullVertex() {
+        assertFalse(graph.containsVertex(null));
+    }
+
+    @Test
+    void testContainsNullEdge() {
+        assertFalse(graph.containsEdge(null));
+    }
+
+    @Test
+    void testRemoveVertexRemovesAssociatedEdges() {
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        graph.addEdge(new Edge(v1, v2));
+        graph.addEdge(new Edge(v2, v3));
+        graph.addEdge(new Edge(v3, v2));
+        
+        graph.removeVertex(v2);
+        
+        assertFalse(graph.containsVertex(v2));
+        assertEquals(2, graph.getVertexCount());
+        assertEquals(0, graph.getEdgeCount());
     }
 }

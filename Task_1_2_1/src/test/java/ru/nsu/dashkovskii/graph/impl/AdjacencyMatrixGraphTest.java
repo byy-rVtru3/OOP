@@ -1,15 +1,18 @@
 package ru.nsu.dashkovskii.graph.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.dashkovskii.graph.Graph;
 import ru.nsu.dashkovskii.model.Edge;
 import ru.nsu.dashkovskii.model.Vertex;
 import ru.nsu.dashkovskii.strategy.KhanTopologicalSort;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса AdjacencyMatrixGraph.
@@ -138,7 +141,7 @@ class AdjacencyMatrixGraphTest {
 
     @Test
     void testEqualsGraph() {
-        Graph graph2 = new AdjacencyListGraph(true);
+        final Graph graph2 = new AdjacencyListGraph(true);
         
         graph.addVertex(v1);
         graph.addVertex(v2);

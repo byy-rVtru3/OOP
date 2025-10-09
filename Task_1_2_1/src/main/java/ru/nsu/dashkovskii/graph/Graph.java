@@ -98,16 +98,6 @@ public interface Graph {
     }
 
     /**
-     * Удалить ребро между двумя вершинами (default метод).
-     *
-     * @param from начальная вершина
-     * @param to   конечная вершина
-     */
-    default void removeEdge(Vertex from, Vertex to) {
-        removeEdge(new Edge(from, to));
-    }
-
-    /**
      * Получить количество вершин в графе (default метод).
      *
      * @return количество вершин
@@ -123,6 +113,16 @@ public interface Graph {
      */
     default int getEdgeCount() {
         return getEdges().size();
+    }
+
+    /**
+     * Удалить ребро между двумя вершинами (default метод).
+     *
+     * @param from начальная вершина
+     * @param to   конечная вершина
+     */
+    default void removeEdge(Vertex from, Vertex to) {
+        removeEdge(new Edge(from, to));
     }
 
     /**
