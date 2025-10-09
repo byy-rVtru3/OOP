@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'jacoco'
 }
 
@@ -17,6 +18,18 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 'ru.nsu.dashkovskii.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': application.mainClass
+        )
+    }
 }
 
 jacocoTestReport {
