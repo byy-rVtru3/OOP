@@ -315,11 +315,48 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="setTopologicalSortStrategy(ru.nsu.dashkovskii.strategy.TopologicalSortStrategy)">
+<h3>setTopologicalSortStrategy</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setTopologicalSortStrategy</span><wbr><span class="parameters">(<a href="../strategy/TopologicalSortStrategy.html" title="interface in ru.nsu.dashkovskii.strategy">TopologicalSortStrategy</a>&nbsp;strategy)</span></div>
+<div class="block">Установить стратегию топологической сортировки.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>strategy</code> - стратегия сортировки</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="topologicalSort()">
+<h3>topologicalSort</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">topologicalSort</span>()</div>
+<div class="block">Выполнить топологическую сортировку.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список отсортированных вершин</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - если граф содержит цикл</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="addEdge(ru.nsu.dashkovskii.model.Vertex,ru.nsu.dashkovskii.model.Vertex)">
 <h3>addEdge</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;from,
  <a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;to)</span></div>
 <div class="block">Добавить ребро между двумя вершинами (default метод).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>from</code> - начальная вершина</dd>
+<dd><code>to</code> - конечная вершина</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="removeEdge(ru.nsu.dashkovskii.model.Vertex,ru.nsu.dashkovskii.model.Vertex)">
+<h3>removeEdge</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;from,
+ <a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;to)</span></div>
+<div class="block">Удалить ребро между двумя вершинами (default метод).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начальная вершина</dd>
@@ -350,19 +387,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="removeEdge(ru.nsu.dashkovskii.model.Vertex,ru.nsu.dashkovskii.model.Vertex)">
-<h3>removeEdge</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;from,
- <a href="../model/Vertex.html" title="class in ru.nsu.dashkovskii.model">Vertex</a>&nbsp;to)</span></div>
-<div class="block">Удалить ребро между двумя вершинами (default метод).</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>from</code> - начальная вершина</dd>
-<dd><code>to</code> - конечная вершина</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="readFromFile(java.lang.String)">
 <h3>readFromFile</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">readFromFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename)</span>
@@ -387,30 +411,6 @@ loadScripts(document, 'script');</script>
 <dd><code>other</code> - другой граф</dd>
 <dt>Returns:</dt>
 <dd>true, если графы равны</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="setTopologicalSortStrategy(ru.nsu.dashkovskii.strategy.TopologicalSortStrategy)">
-<h3>setTopologicalSortStrategy</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setTopologicalSortStrategy</span><wbr><span class="parameters">(<a href="../strategy/TopologicalSortStrategy.html" title="interface in ru.nsu.dashkovskii.strategy">TopologicalSortStrategy</a>&nbsp;strategy)</span></div>
-<div class="block">Установить стратегию топологической сортировки.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>strategy</code> - стратегия сортировки</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="topologicalSort()">
-<h3>topologicalSort</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">topologicalSort</span>()</div>
-<div class="block">Выполнить топологическую сортировку.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>список отсортированных вершин</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - если граф содержит цикл</dd>
 </dl>
 </section>
 </li>
