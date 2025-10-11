@@ -14,7 +14,7 @@ import ru.nsu.dashkovskii.strategy.TopologicalSortStrategy;
  */
 public class AdjacencyListGraph implements Graph {
     private final boolean isDirected;
-    private final Map<Vertex, List<Edge>> adjacencyList;
+    private final Map<Vertex, List<Edge>> adjacencyMap;
     private TopologicalSortStrategy sortStrategy;
 
     /**
@@ -24,7 +24,7 @@ public class AdjacencyListGraph implements Graph {
      */
     public AdjacencyListGraph(boolean isDirected) {
         this.isDirected = isDirected;
-        this.adjacencyList = new HashMap<>();
+        this.adjacencyMap = new HashMap<>();
     }
 
     /**
@@ -35,7 +35,7 @@ public class AdjacencyListGraph implements Graph {
      */
     public AdjacencyListGraph(boolean isDirected, TopologicalSortStrategy sortStrategy) {
         this.isDirected = isDirected;
-        this.adjacencyList = new HashMap<>();
+        this.adjacencyMap = new HashMap<>();
         this.sortStrategy = sortStrategy;
     }
 
@@ -44,7 +44,7 @@ public class AdjacencyListGraph implements Graph {
         if (vertex == null || containsVertex(vertex)) {
             return;
         }
-        adjacencyList.put(vertex, new ArrayList<>());
+        adjacencyMap.put(vertex, new ArrayList<>());
     }
 
     @Override
@@ -54,10 +54,10 @@ public class AdjacencyListGraph implements Graph {
         }
 
         // Удаляем вершину
-        adjacencyList.remove(vertex);
+        adjacencyMap.remove(vertex);
 
         // Удаляем все рёбра, ведущие к этой вершине
-        for (List<Edge> edges : adjacencyList.values()) {
+        for (List<Edge> edges : adjacencyMap.values()) {
             edges.removeIf(edge -> edge.to().equals(vertex));
         }
     }
@@ -79,11 +79,15 @@ public class AdjacencyListGraph implements Graph {
         }
 
         // Добавляем ребро
-        adjacencyList.get(from).add(edge);
+        adjacencyMap.get(from).add(edge);
 
         // Для неориентированного графа добавляем обратное ребро
         if (!isDirected) {
-            adjacencyList.get(to).add(new Edge(to, from, edge.weight()));
+            // Проверяем, чтобы не добавить дубликат обратного ребра
+            Edge reverseEdge = new Edge(to, from, edge.weight());
+            if (!adjacencyMap.get(to).contains(reverseEdge)) {
+                adjacencyMap.get(to).add(reverseEdge);
+            }
         }
     }
 
@@ -100,23 +104,22 @@ public class AdjacencyListGraph implements Graph {
             return;
         }
 
-        adjacencyList.get(from).remove(edge);
+        adjacencyMap.get(from).remove(edge);
 
         if (!isDirected) {
-            adjacencyList.get(to).removeIf(e ->
+            adjacencyMap.get(to).removeIf(e ->
                     e.from().equals(to) && e.to().equals(from));
         }
     }
 
     @Override
     public List<Vertex> getNeighbors(Vertex vertex) {
-        List<Vertex> neighbors = new ArrayList<>();
-
         if (!containsVertex(vertex)) {
-            return neighbors;
+            return new ArrayList<>();
         }
 
-        for (Edge edge : adjacencyList.get(vertex)) {
+        List<Vertex> neighbors = new ArrayList<>();
+        for (Edge edge : adjacencyMap.get(vertex)) {
             neighbors.add(edge.to());
         }
 
@@ -125,36 +128,30 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public List<Vertex> getVertices() {
-        return new ArrayList<>(adjacencyList.keySet());
+        return new ArrayList<>(adjacencyMap.keySet());
     }
 
     @Override
     public List<Edge> getEdges() {
         List<Edge> allEdges = new ArrayList<>();
 
-        for (List<Edge> edges : adjacencyList.values()) {
-            allEdges.addAll(edges);
-        }
-
-        // Для неориентированного графа удаляем дубликаты
-        if (!isDirected) {
-            List<Edge> uniqueEdges = new ArrayList<>();
-            for (Edge edge : allEdges) {
-                boolean isDuplicate = false;
-                for (Edge uniqueEdge : uniqueEdges) {
-                    if ((uniqueEdge.from().equals(edge.from())
-                            && uniqueEdge.to().equals(edge.to()))
-                            || (uniqueEdge.from().equals(edge.to())
-                            && uniqueEdge.to().equals(edge.from()))) {
-                        isDuplicate = true;
-                        break;
+        if (isDirected) {
+            for (List<Edge> edges : adjacencyMap.values()) {
+                allEdges.addAll(edges);
+            }
+        } else {
+            // Для неориентированного графа возвращаем только уникальные рёбра
+            java.util.Set<Edge> uniqueEdges = new java.util.HashSet<>();
+            for (List<Edge> edges : adjacencyMap.values()) {
+                for (Edge edge : edges) {
+                    // Добавляем только если обратного ребра ещё нет
+                    Edge reverseEdge = new Edge(edge.to(), edge.from(), edge.weight());
+                    if (!uniqueEdges.contains(reverseEdge)) {
+                        uniqueEdges.add(edge);
                     }
                 }
-                if (!isDuplicate) {
-                    uniqueEdges.add(edge);
-                }
             }
-            return uniqueEdges;
+            allEdges.addAll(uniqueEdges);
         }
 
         return allEdges;
@@ -162,7 +159,7 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public boolean containsVertex(Vertex vertex) {
-        return adjacencyList.containsKey(vertex);
+        return adjacencyMap.containsKey(vertex);
     }
 
     @Override
@@ -170,7 +167,7 @@ public class AdjacencyListGraph implements Graph {
         if (edge == null || !containsVertex(edge.from())) {
             return false;
         }
-        return adjacencyList.get(edge.from()).contains(edge);
+        return adjacencyMap.get(edge.from()).contains(edge);
     }
 
     @Override
@@ -188,7 +185,7 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public int hashCode() {
-        return adjacencyList.hashCode();
+        return adjacencyMap.hashCode();
     }
 
     @Override
@@ -198,7 +195,7 @@ public class AdjacencyListGraph implements Graph {
                 .append(isDirected ? "ориентированный" : "неориентированный")
                 .append("):\n");
 
-        for (Map.Entry<Vertex, List<Edge>> entry : adjacencyList.entrySet()) {
+        for (Map.Entry<Vertex, List<Edge>> entry : adjacencyMap.entrySet()) {
             sb.append(entry.getKey()).append(" -> ");
             List<Vertex> neighbors = new ArrayList<>();
             for (Edge edge : entry.getValue()) {

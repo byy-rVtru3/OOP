@@ -32,6 +32,10 @@ jar {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.11"
+}
+
 jacocoTestReport {
     reports {
         xml.required = true

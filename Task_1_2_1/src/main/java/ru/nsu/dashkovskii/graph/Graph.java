@@ -88,6 +88,21 @@ public interface Graph {
     boolean isDirected();
 
     /**
+     * Установить стратегию топологической сортировки.
+     *
+     * @param strategy стратегия сортировки
+     */
+    void setTopologicalSortStrategy(TopologicalSortStrategy strategy);
+
+    /**
+     * Выполнить топологическую сортировку.
+     *
+     * @return список отсортированных вершин
+     * @throws IllegalStateException если граф содержит цикл
+     */
+    List<Integer> topologicalSort();
+
+    /**
      * Добавить ребро между двумя вершинами (default метод).
      *
      * @param from начальная вершина
@@ -95,6 +110,16 @@ public interface Graph {
      */
     default void addEdge(Vertex from, Vertex to) {
         addEdge(new Edge(from, to));
+    }
+
+    /**
+     * Удалить ребро между двумя вершинами (default метод).
+     *
+     * @param from начальная вершина
+     * @param to   конечная вершина
+     */
+    default void removeEdge(Vertex from, Vertex to) {
+        removeEdge(new Edge(from, to));
     }
 
     /**
@@ -113,16 +138,6 @@ public interface Graph {
      */
     default int getEdgeCount() {
         return getEdges().size();
-    }
-
-    /**
-     * Удалить ребро между двумя вершинами (default метод).
-     *
-     * @param from начальная вершина
-     * @param to   конечная вершина
-     */
-    default void removeEdge(Vertex from, Vertex to) {
-        removeEdge(new Edge(from, to));
     }
 
     /**
@@ -163,19 +178,4 @@ public interface Graph {
 
         return thisEdges.equals(otherEdges);
     }
-
-    /**
-     * Установить стратегию топологической сортировки.
-     *
-     * @param strategy стратегия сортировки
-     */
-    void setTopologicalSortStrategy(TopologicalSortStrategy strategy);
-
-    /**
-     * Выполнить топологическую сортировку.
-     *
-     * @return список отсортированных вершин
-     * @throws IllegalStateException если граф содержит цикл
-     */
-    List<Integer> topologicalSort();
 }
