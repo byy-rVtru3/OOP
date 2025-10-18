@@ -16,7 +16,7 @@ public class AdjacencyMatrixGraph implements Graph {
     private final boolean isDirected;
     private final List<Vertex> vertices;
     private final Map<Vertex, Integer> vertexIndices;
-    private int[][] matrix;
+    private List<List<Integer>> matrix;
     private TopologicalSortStrategy sortStrategy;
 
     /**
@@ -28,7 +28,7 @@ public class AdjacencyMatrixGraph implements Graph {
         this.isDirected = isDirected;
         this.vertices = new ArrayList<>();
         this.vertexIndices = new HashMap<>();
-        this.matrix = new int[0][0];
+        this.matrix = new ArrayList<>();
     }
 
     /**
@@ -41,7 +41,7 @@ public class AdjacencyMatrixGraph implements Graph {
         this.isDirected = isDirected;
         this.vertices = new ArrayList<>();
         this.vertexIndices = new HashMap<>();
-        this.matrix = new int[0][0];
+        this.matrix = new ArrayList<>();
         this.sortStrategy = sortStrategy;
     }
 
@@ -55,14 +55,17 @@ public class AdjacencyMatrixGraph implements Graph {
         vertices.add(vertex);
         vertexIndices.put(vertex, oldSize);
 
-        int newSize = vertices.size();
-        int[][] newMatrix = new int[newSize][newSize];
-
-        for (int i = 0; i < oldSize; i++) {
-            System.arraycopy(matrix[i], 0, newMatrix[i], 0, oldSize);
+        // Добавляем новую строку в матрицу
+        List<Integer> newRow = new ArrayList<>();
+        for (int i = 0; i < vertices.size(); i++) {
+            newRow.add(0);
         }
+        matrix.add(newRow);
 
-        matrix = newMatrix;
+        // Расширяем существующие строки на один столбец
+        for (int i = 0; i < oldSize; i++) {
+            matrix.get(i).add(0);
+        }
     }
 
     @Override
@@ -80,26 +83,13 @@ public class AdjacencyMatrixGraph implements Graph {
             vertexIndices.put(vertices.get(i), i);
         }
 
-        int newSize = vertices.size();
-        int[][] newMatrix = new int[newSize][newSize];
+        // Удаляем строку из матрицы
+        matrix.remove(index);
 
-        int newRow = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            if (i == index) {
-                continue;
-            }
-            int newCol = 0;
-            for (int j = 0; j < matrix.length; j++) {
-                if (j == index) {
-                    continue;
-                }
-                newMatrix[newRow][newCol] = matrix[i][j];
-                newCol++;
-            }
-            newRow++;
+        // Удаляем столбец из всех строк
+        for (List<Integer> row : matrix) {
+            row.remove(index);
         }
-
-        matrix = newMatrix;
     }
 
     @Override
@@ -121,10 +111,10 @@ public class AdjacencyMatrixGraph implements Graph {
         int fromIndex = vertexIndices.get(from);
         int toIndex = vertexIndices.get(to);
 
-        matrix[fromIndex][toIndex] = edge.weight();
+        matrix.get(fromIndex).set(toIndex, edge.weight());
 
         if (!isDirected) {
-            matrix[toIndex][fromIndex] = edge.weight();
+            matrix.get(toIndex).set(fromIndex, edge.weight());
         }
     }
 
@@ -144,10 +134,10 @@ public class AdjacencyMatrixGraph implements Graph {
         int fromIndex = vertexIndices.get(from);
         int toIndex = vertexIndices.get(to);
 
-        matrix[fromIndex][toIndex] = 0;
+        matrix.get(fromIndex).set(toIndex, 0);
 
         if (!isDirected) {
-            matrix[toIndex][fromIndex] = 0;
+            matrix.get(toIndex).set(fromIndex, 0);
         }
     }
 
@@ -162,7 +152,7 @@ public class AdjacencyMatrixGraph implements Graph {
         int index = vertexIndices.get(vertex);
 
         for (int i = 0; i < vertices.size(); i++) {
-            if (matrix[index][i] != 0) {
+            if (matrix.get(index).get(i) != 0) {
                 neighbors.add(vertices.get(i));
             }
         }
@@ -181,9 +171,9 @@ public class AdjacencyMatrixGraph implements Graph {
 
         for (int i = 0; i < vertices.size(); i++) {
             for (int j = 0; j < vertices.size(); j++) {
-                if (matrix[i][j] != 0) {
+                if (matrix.get(i).get(j) != 0) {
                     if (isDirected || i <= j) {
-                        edges.add(new Edge(vertices.get(i), vertices.get(j), matrix[i][j]));
+                        edges.add(new Edge(vertices.get(i), vertices.get(j), matrix.get(i).get(j)));
                     }
                 }
             }
@@ -207,7 +197,7 @@ public class AdjacencyMatrixGraph implements Graph {
         int fromIndex = vertexIndices.get(edge.from());
         int toIndex = vertexIndices.get(edge.to());
 
-        return matrix[fromIndex][toIndex] != 0;
+        return matrix.get(fromIndex).get(toIndex) != 0;
     }
 
     @Override
@@ -246,7 +236,7 @@ public class AdjacencyMatrixGraph implements Graph {
         for (int i = 0; i < vertices.size(); i++) {
             sb.append(String.format("%-4s", vertices.get(i)));
             for (int j = 0; j < vertices.size(); j++) {
-                sb.append(String.format("%-4d", matrix[i][j]));
+                sb.append(String.format("%-4d", matrix.get(i).get(j)));
             }
             sb.append("\n");
         }

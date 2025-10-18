@@ -2,8 +2,10 @@ package ru.nsu.dashkovskii.graph.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import ru.nsu.dashkovskii.graph.Graph;
 import ru.nsu.dashkovskii.model.Edge;
 import ru.nsu.dashkovskii.model.Vertex;
@@ -141,7 +143,7 @@ public class AdjacencyListGraph implements Graph {
             }
         } else {
             // Для неориентированного графа возвращаем только уникальные рёбра
-            java.util.Set<Edge> uniqueEdges = new java.util.HashSet<>();
+            Set<Edge> uniqueEdges = new HashSet<>();
             for (List<Edge> edges : adjacencyMap.values()) {
                 for (Edge edge : edges) {
                     // Добавляем только если обратного ребра ещё нет

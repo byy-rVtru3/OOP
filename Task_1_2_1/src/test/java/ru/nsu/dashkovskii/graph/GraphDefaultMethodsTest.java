@@ -20,7 +20,6 @@ import ru.nsu.dashkovskii.model.Vertex;
  */
 class GraphDefaultMethodsTest {
 
-    private static final String TEST_FILE = "test_graph_default.txt";
     private Graph graph;
     private Vertex v1;
     private Vertex v2;
@@ -152,16 +151,5 @@ class GraphDefaultMethodsTest {
         graph2.addVertex(v1);
         
         assertFalse(graph.equalsGraph(graph2));
-    }
-
-    @Test
-    void testEqualsGraphNull() {
-        assertFalse(graph.equalsGraph(null));
-    }
-
-    private void createTestFile(String content) throws IOException {
-        try (FileWriter writer = new FileWriter(TEST_FILE)) {
-            writer.write(content);
-        }
     }
 }

@@ -17,7 +17,7 @@ public class IncidenceMatrixGraph implements Graph {
     private final List<Vertex> vertices;
     private final List<Edge> edges;
     private final Map<Vertex, Integer> vertexIndices;
-    private int[][] matrix;
+    private List<List<Integer>> matrix;
     private TopologicalSortStrategy sortStrategy;
 
     /**
@@ -30,7 +30,7 @@ public class IncidenceMatrixGraph implements Graph {
         this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.vertexIndices = new HashMap<>();
-        this.matrix = new int[0][0];
+        this.matrix = new ArrayList<>();
     }
 
     /**
@@ -44,7 +44,7 @@ public class IncidenceMatrixGraph implements Graph {
         this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.vertexIndices = new HashMap<>();
-        this.matrix = new int[0][0];
+        this.matrix = new ArrayList<>();
         this.sortStrategy = sortStrategy;
     }
 
@@ -58,16 +58,12 @@ public class IncidenceMatrixGraph implements Graph {
         vertices.add(vertex);
         vertexIndices.put(vertex, oldVertexCount);
 
-        // Расширяем матрицу
-        int newVertexCount = vertices.size();
-        int edgeCount = edges.size();
-        int[][] newMatrix = new int[newVertexCount][edgeCount];
-
-        for (int i = 0; i < oldVertexCount; i++) {
-            System.arraycopy(matrix[i], 0, newMatrix[i], 0, edgeCount);
+        // Добавляем новую строку в матрицу (с нулями для всех существующих рёбер)
+        List<Integer> newRow = new ArrayList<>();
+        for (int i = 0; i < edges.size(); i++) {
+            newRow.add(0);
         }
-
-        matrix = newMatrix;
+        matrix.add(newRow);
     }
 
     @Override
@@ -98,21 +94,8 @@ public class IncidenceMatrixGraph implements Graph {
             vertexIndices.put(vertices.get(i), i);
         }
 
-        // Сжимаем матрицу
-        int newVertexCount = vertices.size();
-        int edgeCount = edges.size();
-        int[][] newMatrix = new int[newVertexCount][edgeCount];
-
-        int newRow = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            if (i == index) {
-                continue;
-            }
-            System.arraycopy(matrix[i], 0, newMatrix[newRow], 0, edgeCount);
-            newRow++;
-        }
-
-        matrix = newMatrix;
+        // Удаляем строку из матрицы
+        matrix.remove(index);
     }
 
     @Override
@@ -133,32 +116,27 @@ public class IncidenceMatrixGraph implements Graph {
 
         edges.add(edge);
 
-        // Расширяем матрицу
-        int vertexCount = vertices.size();
-        int oldEdgeCount = edges.size() - 1;
-        int newEdgeCount = edges.size();
-        int[][] newMatrix = new int[vertexCount][newEdgeCount];
-
-        for (int i = 0; i < vertexCount; i++) {
-            if (oldEdgeCount > 0) {
-                System.arraycopy(matrix[i], 0, newMatrix[i], 0, oldEdgeCount);
-            }
-        }
-
-        // Заполняем новый столбец
+        // Добавляем новый столбец в каждую строку матрицы
         int fromIndex = vertexIndices.get(from);
         int toIndex = vertexIndices.get(to);
-        int edgeIndex = newEdgeCount - 1;
 
-        if (isDirected) {
-            newMatrix[fromIndex][edgeIndex] = 1;   // исходящее
-            newMatrix[toIndex][edgeIndex] = -1;    // входящее
-        } else {
-            newMatrix[fromIndex][edgeIndex] = 1;
-            newMatrix[toIndex][edgeIndex] = 1;
+        for (int i = 0; i < vertices.size(); i++) {
+            if (i == fromIndex) {
+                if (isDirected) {
+                    matrix.get(i).add(1);   // исходящее ребро
+                } else {
+                    matrix.get(i).add(1);
+                }
+            } else if (i == toIndex) {
+                if (isDirected) {
+                    matrix.get(i).add(-1);  // входящее ребро
+                } else {
+                    matrix.get(i).add(1);
+                }
+            } else {
+                matrix.get(i).add(0);  // вершина не связана с этим ребром
+            }
         }
-
-        matrix = newMatrix;
     }
 
     @Override
@@ -181,23 +159,10 @@ public class IncidenceMatrixGraph implements Graph {
 
         edges.remove(edgeIndex);
 
-        // Сжимаем матрицу
-        int vertexCount = vertices.size();
-        int newEdgeCount = edges.size();
-        int[][] newMatrix = new int[vertexCount][newEdgeCount];
-
-        for (int i = 0; i < vertexCount; i++) {
-            int newCol = 0;
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (j == edgeIndex) {
-                    continue;
-                }
-                newMatrix[i][newCol] = matrix[i][j];
-                newCol++;
-            }
+        // Удаляем столбец из всех строк матрицы
+        for (List<Integer> row : matrix) {
+            row.remove(edgeIndex);
         }
-
-        matrix = newMatrix;
     }
 
     @Override
@@ -285,7 +250,7 @@ public class IncidenceMatrixGraph implements Graph {
         for (int i = 0; i < vertices.size(); i++) {
             sb.append(String.format("%-6s", vertices.get(i)));
             for (int j = 0; j < edges.size(); j++) {
-                sb.append(String.format("%-4d", matrix[i][j]));
+                sb.append(String.format("%-4d", matrix.get(i).get(j)));
             }
             sb.append("\n");
         }
