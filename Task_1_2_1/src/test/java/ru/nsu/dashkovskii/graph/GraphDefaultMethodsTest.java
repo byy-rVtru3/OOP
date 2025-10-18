@@ -25,6 +25,9 @@ class GraphDefaultMethodsTest {
     private Vertex v2;
     private Vertex v3;
 
+    // Добавляем имя файла теста
+    private static final String TEST_FILE = "graph.txt";
+
     @BeforeEach
     void setUp() {
         graph = new AdjacencyListGraph(true);
@@ -38,6 +41,13 @@ class GraphDefaultMethodsTest {
         File file = new File(TEST_FILE);
         if (file.exists()) {
             file.delete();
+        }
+    }
+
+    // Добавляем вспомогательный метод для создания файла с содержимым
+    private void createTestFile(String content) throws IOException {
+        try (FileWriter writer = new FileWriter(TEST_FILE)) {
+            writer.write(content);
         }
     }
 
