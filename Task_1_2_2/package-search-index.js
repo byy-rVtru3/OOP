@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.dashkovskii"},{"l":"ru.nsu.dashkovskii.exceptions"},{"l":"ru.nsu.dashkovskii.hashtable"}];updateSearchResults();
