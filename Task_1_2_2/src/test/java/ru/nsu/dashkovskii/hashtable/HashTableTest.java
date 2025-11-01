@@ -1,6 +1,7 @@
 package ru.nsu.dashkovskii.hashtable;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -42,7 +43,9 @@ class HashTableTest {
         ht.put("x", 1);
         var it = ht.iterator();
         ht.put("y", 2);
-        assertThrows(ru.nsu.dashkovskii.exceptions.ConcurrentModificationException.class, it::hasNext);
+        assertThrows(
+                ru.nsu.dashkovskii.exceptions.ConcurrentModificationException.class,
+                it::hasNext);
     }
 
     @Test

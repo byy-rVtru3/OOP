@@ -2,6 +2,7 @@ package ru.nsu.dashkovskii.hashtable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import ru.nsu.dashkovskii.exceptions.ConcurrentModificationException;
 
 /**
@@ -37,15 +38,18 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
      */
     @Override
     public boolean hasNext() {
-        if (expectedModCount != table.getModCount())
+        if (expectedModCount != table.getModCount()) {
             throw new ConcurrentModificationException("HashTable modified during iteration");
+        }
 
-        if (current != null && current.next != null)
+        if (current != null && current.next != null) {
             return true;
+        }
 
         HashNode<K, V>[] tableArray = table.getTable();
-        while (bucketIndex < tableArray.length && tableArray[bucketIndex] == null)
+        while (bucketIndex < tableArray.length && tableArray[bucketIndex] == null) {
             bucketIndex++;
+        }
 
         return bucketIndex < tableArray.length;
     }
@@ -58,13 +62,16 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
      */
     @Override
     public HashNode<K, V> next() {
-        if (!hasNext()) throw new NoSuchElementException();
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
 
         HashNode<K, V>[] tableArray = table.getTable();
-        if (current == null || current.next == null)
+        if (current == null || current.next == null) {
             current = tableArray[bucketIndex++];
-        else
+        } else {
             current = current.next;
+        }
 
         return current;
     }

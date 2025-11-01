@@ -48,7 +48,9 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      * @throws IllegalArgumentException если ключ равен null
      */
     public void put(K key, V value) {
-        if (key == null) throw new IllegalArgumentException("Key cannot be null");
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null");
+        }
         int i = index(key);
         for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
             if (node.key.equals(key)) {
@@ -60,7 +62,9 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
         table[i] = new HashNode<>(key, value, table[i]);
         size++;
         modCount++;
-        if ((double) size / table.length > LOAD_FACTOR) resize();
+        if ((double) size / table.length > LOAD_FACTOR) {
+            resize();
+        }
     }
 
     /**
@@ -90,9 +94,11 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      */
     public V get(K key) {
         int i = index(key);
-        for (HashNode<K, V> node = table[i]; node != null; node = node.next)
-            if (node.key.equals(key))
+        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
+            if (node.key.equals(key)) {
                 return node.value;
+            }
+        }
         return null;
     }
 
@@ -117,10 +123,11 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
         HashNode<K, V> prev = null;
         for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
             if (node.key.equals(key)) {
-                if (prev == null)
+                if (prev == null) {
                     table[i] = node.next;
-                else
+                } else {
                     prev.next = node.next;
+                }
                 size--;
                 modCount++;
                 return node.value;
@@ -137,9 +144,11 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
         HashNode<K, V>[] old = table;
         table = new HashNode[old.length * 2];
         size = 0;
-        for (HashNode<K, V> head : old)
-            for (HashNode<K, V> node = head; node != null; node = node.next)
+        for (HashNode<K, V> head : old) {
+            for (HashNode<K, V> node = head; node != null; node = node.next) {
                 put(node.key, node.value);
+            }
+        }
     }
 
     /**
@@ -189,7 +198,9 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
         StringBuilder sb = new StringBuilder("{");
         boolean first = true;
         for (HashNode<K, V> node : this) {
-            if (!first) sb.append(", ");
+            if (!first) {
+                sb.append(", ");
+            }
             first = false;
             sb.append(node.key).append("=").append(node.value);
         }
@@ -206,13 +217,20 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof HashTable<?, ?> other)) return false;
-        if (this.size != other.size) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof HashTable<?, ?> other)) {
+            return false;
+        }
+        if (this.size != other.size) {
+            return false;
+        }
         for (HashNode<K, V> node : this) {
             Object val = other.getRaw(node.key);
-            if (!Objects.equals(node.value, val))
+            if (!Objects.equals(node.value, val)) {
                 return false;
+            }
         }
         return true;
     }
@@ -225,9 +243,11 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      */
     private Object getRaw(Object key) {
         int i = Math.abs(key.hashCode()) % table.length;
-        for (HashNode<K, V> node = table[i]; node != null; node = node.next)
-            if (node.key.equals(key))
+        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
+            if (node.key.equals(key)) {
                 return node.value;
+            }
+        }
         return null;
     }
 
